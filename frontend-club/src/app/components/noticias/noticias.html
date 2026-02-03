@@ -1,0 +1,22 @@
+<div class="container">
+  <h2 class="titulo-seccion">
+    <i class="bi bi-newspaper"></i> Últimas Noticias
+  </h2>
+
+  <div class="noticias-grid">
+
+    <article class="news-card" *ngFor="let noticia of listaNoticias">
+      <div class="card-header">
+        <span class="fecha"><i class="bi bi-calendar-event"></i> {{ noticia.fecha_publicacion }}</span>
+      </div>
+      <div class="card-body">
+        <h3>{{ noticia.titulo }}</h3>
+        <p>{{ noticia.contenido }}</p>
+      </div>
+      <div class="card-footer">
+        <button class="btn-leer">Leer más <i class="bi bi-arrow-right"></i></button>
+      </div>
+    </article>
+
+  </div>
+</div>

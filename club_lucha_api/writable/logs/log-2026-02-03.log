@@ -1,0 +1,152 @@
+ERROR - 2026-02-03 17:12:38 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'172.19.0.4' (using password: YES) in /var/www/html/club_lucha_api/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /var/www/html/club_lucha_api/system/Database/MySQLi/Connection.php(201): mysqli->real_connect('db', 'root', Object(SensitiveParameterValue), 'club_lucha_db', 3306, '', 0)
+#1 /var/www/html/club_lucha_api/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /var/www/html/club_lucha_api/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 /var/www/html/club_lucha_api/app/Controllers/Api/Noticias.php(17): CodeIgniter\Database\BaseConnection->query('SELECT * FROM n...')
+#4 /var/www/html/club_lucha_api/system/CodeIgniter.php(933): App\Controllers\Api\Noticias->index()
+#5 /var/www/html/club_lucha_api/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Noticias))
+#6 /var/www/html/club_lucha_api/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /var/www/html/club_lucha_api/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 /var/www/html/club_lucha_api/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 /var/www/html/club_lucha_api/public/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'172.19.0.4' (using password: YES) in /var/www/html/club_lucha_api/system/Database/MySQLi/Connection.php:246
+Stack trace:
+#0 /var/www/html/club_lucha_api/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /var/www/html/club_lucha_api/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 /var/www/html/club_lucha_api/app/Controllers/Api/Noticias.php(17): CodeIgniter\Database\BaseConnection->query('SELECT * FROM n...')
+#3 /var/www/html/club_lucha_api/system/CodeIgniter.php(933): App\Controllers\Api\Noticias->index()
+#4 /var/www/html/club_lucha_api/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Noticias))
+#5 /var/www/html/club_lucha_api/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 /var/www/html/club_lucha_api/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#7 /var/www/html/club_lucha_api/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#8 /var/www/html/club_lucha_api/public/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#9 {main}
+CRITICAL - 2026-02-03 17:12:38 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'172.19.0.4' (using password: YES)
+[Method: GET, Route: api/noticias]
+in SYSTEMPATH/Database/BaseConnection.php on line 465.
+ 1 SYSTEMPATH/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 APPPATH/Controllers/Api/Noticias.php(17): CodeIgniter\Database\BaseConnection->query('SELECT * FROM noticias')
+ 3 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\Noticias->index()
+ 4 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Noticias))
+ 5 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-02-03 17:13:41 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'172.19.0.4' (using password: YES) in /var/www/html/club_lucha_api/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /var/www/html/club_lucha_api/system/Database/MySQLi/Connection.php(201): mysqli->real_connect('db', 'root', Object(SensitiveParameterValue), 'club_lucha_db', 3306, '', 0)
+#1 /var/www/html/club_lucha_api/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /var/www/html/club_lucha_api/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 /var/www/html/club_lucha_api/app/Controllers/Api/Noticias.php(17): CodeIgniter\Database\BaseConnection->query('SELECT * FROM n...')
+#4 /var/www/html/club_lucha_api/system/CodeIgniter.php(933): App\Controllers\Api\Noticias->index()
+#5 /var/www/html/club_lucha_api/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Noticias))
+#6 /var/www/html/club_lucha_api/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /var/www/html/club_lucha_api/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 /var/www/html/club_lucha_api/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 /var/www/html/club_lucha_api/public/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'172.19.0.4' (using password: YES) in /var/www/html/club_lucha_api/system/Database/MySQLi/Connection.php:246
+Stack trace:
+#0 /var/www/html/club_lucha_api/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /var/www/html/club_lucha_api/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 /var/www/html/club_lucha_api/app/Controllers/Api/Noticias.php(17): CodeIgniter\Database\BaseConnection->query('SELECT * FROM n...')
+#3 /var/www/html/club_lucha_api/system/CodeIgniter.php(933): App\Controllers\Api\Noticias->index()
+#4 /var/www/html/club_lucha_api/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Noticias))
+#5 /var/www/html/club_lucha_api/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 /var/www/html/club_lucha_api/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#7 /var/www/html/club_lucha_api/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#8 /var/www/html/club_lucha_api/public/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#9 {main}
+CRITICAL - 2026-02-03 17:13:41 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'172.19.0.4' (using password: YES)
+[Method: GET, Route: api/noticias]
+in SYSTEMPATH/Database/BaseConnection.php on line 465.
+ 1 SYSTEMPATH/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 APPPATH/Controllers/Api/Noticias.php(17): CodeIgniter\Database\BaseConnection->query('SELECT * FROM noticias')
+ 3 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\Noticias->index()
+ 4 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Noticias))
+ 5 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-02-03 17:14:04 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'172.19.0.4' (using password: YES) in /var/www/html/club_lucha_api/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /var/www/html/club_lucha_api/system/Database/MySQLi/Connection.php(201): mysqli->real_connect('db', 'root', Object(SensitiveParameterValue), 'club_lucha_db', 3306, '', 0)
+#1 /var/www/html/club_lucha_api/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /var/www/html/club_lucha_api/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 /var/www/html/club_lucha_api/app/Controllers/Api/Noticias.php(17): CodeIgniter\Database\BaseConnection->query('SELECT * FROM n...')
+#4 /var/www/html/club_lucha_api/system/CodeIgniter.php(933): App\Controllers\Api\Noticias->index()
+#5 /var/www/html/club_lucha_api/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Noticias))
+#6 /var/www/html/club_lucha_api/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /var/www/html/club_lucha_api/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 /var/www/html/club_lucha_api/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 /var/www/html/club_lucha_api/public/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'172.19.0.4' (using password: YES) in /var/www/html/club_lucha_api/system/Database/MySQLi/Connection.php:246
+Stack trace:
+#0 /var/www/html/club_lucha_api/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /var/www/html/club_lucha_api/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 /var/www/html/club_lucha_api/app/Controllers/Api/Noticias.php(17): CodeIgniter\Database\BaseConnection->query('SELECT * FROM n...')
+#3 /var/www/html/club_lucha_api/system/CodeIgniter.php(933): App\Controllers\Api\Noticias->index()
+#4 /var/www/html/club_lucha_api/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Noticias))
+#5 /var/www/html/club_lucha_api/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 /var/www/html/club_lucha_api/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#7 /var/www/html/club_lucha_api/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#8 /var/www/html/club_lucha_api/public/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#9 {main}
+CRITICAL - 2026-02-03 17:14:05 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'172.19.0.4' (using password: YES)
+[Method: GET, Route: api/noticias]
+in SYSTEMPATH/Database/BaseConnection.php on line 465.
+ 1 SYSTEMPATH/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 APPPATH/Controllers/Api/Noticias.php(17): CodeIgniter\Database\BaseConnection->query('SELECT * FROM noticias')
+ 3 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\Noticias->index()
+ 4 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Noticias))
+ 5 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-02-03 17:14:29 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'172.19.0.4' (using password: YES) in /var/www/html/club_lucha_api/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /var/www/html/club_lucha_api/system/Database/MySQLi/Connection.php(201): mysqli->real_connect('db', 'root', Object(SensitiveParameterValue), 'club_lucha_db', 3306, '', 0)
+#1 /var/www/html/club_lucha_api/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /var/www/html/club_lucha_api/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 /var/www/html/club_lucha_api/app/Controllers/Api/Noticias.php(17): CodeIgniter\Database\BaseConnection->query('SELECT * FROM n...')
+#4 /var/www/html/club_lucha_api/system/CodeIgniter.php(933): App\Controllers\Api\Noticias->index()
+#5 /var/www/html/club_lucha_api/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Noticias))
+#6 /var/www/html/club_lucha_api/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /var/www/html/club_lucha_api/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 /var/www/html/club_lucha_api/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 /var/www/html/club_lucha_api/public/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'172.19.0.4' (using password: YES) in /var/www/html/club_lucha_api/system/Database/MySQLi/Connection.php:246
+Stack trace:
+#0 /var/www/html/club_lucha_api/system/Database/BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /var/www/html/club_lucha_api/system/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 /var/www/html/club_lucha_api/app/Controllers/Api/Noticias.php(17): CodeIgniter\Database\BaseConnection->query('SELECT * FROM n...')
+#3 /var/www/html/club_lucha_api/system/CodeIgniter.php(933): App\Controllers\Api\Noticias->index()
+#4 /var/www/html/club_lucha_api/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Noticias))
+#5 /var/www/html/club_lucha_api/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 /var/www/html/club_lucha_api/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#7 /var/www/html/club_lucha_api/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#8 /var/www/html/club_lucha_api/public/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#9 {main}
+CRITICAL - 2026-02-03 17:14:29 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'172.19.0.4' (using password: YES)
+[Method: GET, Route: api/noticias]
+in SYSTEMPATH/Database/BaseConnection.php on line 465.
+ 1 SYSTEMPATH/Database/BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 APPPATH/Controllers/Api/Noticias.php(17): CodeIgniter\Database\BaseConnection->query('SELECT * FROM noticias')
+ 3 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\Noticias->index()
+ 4 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Noticias))
+ 5 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

@@ -1,22 +1,37 @@
-<?php
-
-namespace App\Controllers\Api;
+<?php namespace App\Controllers\Api;
 
 use CodeIgniter\RESTful\ResourceController;
+use App\Models\NoticiasModel;
 
 class Noticias extends ResourceController
 {
-    protected $modelName = 'App\Models\NoticiaModel';
-    protected $format    = 'json';
-
     public function index()
     {
-        // Esto hace: SELECT * FROM noticias
-        // Y lo devuelve automáticamente como JSON
-        $db = \Config\Database::connect();
-        $query = $db->query("SELECT * FROM noticias");
-        $resultados = $query->getResultArray();
+        $model = new NoticiasModel();
 
-        return $this->respond($resultados);
+        $data = $model->getNoticias();
+
+        if (empty($data)) {
+            return $this->failNotFound('No se encontraron noticias');
+        }
+
+        return $this->respond($data);
     }
+
+    public function detalle($id)
+    {
+        $model = new NoticiasModel();
+
+        $data = $model->getNoticias($id);
+
+        if ($id !== null && empty($data)) {
+            return $this->failNotFound('No se encontró la noticia con ID: ' . $id);
+        }
+
+        return $this->respond($data);
+    }
+
+    
+    
+    
 }

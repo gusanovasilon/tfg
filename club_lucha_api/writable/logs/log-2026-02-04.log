@@ -1,0 +1,10 @@
+CRITICAL - 2026-02-04 18:07:08 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "login "Content-Type: application"
+[Method: GET, Route: api/login%20%22Content-Type:%20application/json%22%20-d%20%22%7B/%22email/%22:%20/%22admin@club.com/%22,%20/%22password/%22:%20/%221234/%22%7D%22]
+in SYSTEMPATH/Router/Router.php on line 741.
+ 1 SYSTEMPATH/Router/Router.php(207): CodeIgniter\Router\Router->checkDisallowedChars('api/login "Content-Type: application/json" -d "{/"email/": /"admin@club.com/", /"password/": /"1234/"}"')
+ 2 SYSTEMPATH/CodeIgniter.php(832): CodeIgniter\Router\Router->handle('api/login "Content-Type: application/json" -d "{/"email/": /"admin@club.com/", /"password/": /"1234/"}"')
+ 3 SYSTEMPATH/CodeIgniter.php(455): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

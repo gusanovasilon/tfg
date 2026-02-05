@@ -1,27 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/apiService';
+import { NoticiasService } from '../../services/noticiasService';
+import { Noticia } from '../../interfaces/noticiasInterface';
 
 @Component({
   selector: 'app-noticias',
   templateUrl: './noticias.html',
-  standalone:false,
+  standalone: false,
   styleUrls: ['./noticias.css']
 })
 export class NoticiasComponent implements OnInit {
 
-  listaNoticias: any[] = [];
+  listaNoticias: Noticia[] = [];
 
-  constructor(private api: ApiService) {}
+  
+  constructor(private noticiasService: NoticiasService) { }
 
   ngOnInit(): void {
-    this.api.getNoticias().subscribe({
-      next: (data) => {
-        console.log('Noticias recibidas:', data);
-        this.listaNoticias = data;
-      },
-      error: (err) => {
-        console.error('Error al conectar:', err);
-      }
+    this.cargarNoticias();
+  }
+
+  cargarNoticias() {
+    this.noticiasService.getNoticias().subscribe(data => {
+      this.listaNoticias = data;
     });
   }
 }

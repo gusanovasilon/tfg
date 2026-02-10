@@ -16,7 +16,8 @@
   /* Forma y Posición */
   border-radius: 30px; /* Borde totalmente redondo (Pill shape) */
   cursor: pointer;
-  display: inline-flex;
+  display: block;
+  margin: 0 auto;
   align-items: center;
   gap: 8px; /* Espacio entre el icono X y el texto */
 
@@ -39,5 +40,8 @@
 }
 
 .zona-dinamica {
-  background-color: #ffffff;
+  background-color: #fdfdfd8f;
+}
+.fade-in{
+  background-color:#fdfdfd8f;
 }

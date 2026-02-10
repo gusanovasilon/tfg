@@ -1,0 +1,43 @@
+/* --- BOTÓN DE CERRAR --- */
+.btn-close {
+  /* Diseño Base */
+  background-color: #1e3c72; /* Azul corporativo */
+  color: white;
+  border: none; /* Sin bordes feos */
+  padding: 8px 25px; /* Alargado horizontalmente */
+
+  /* Tipografía */
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase; /* MAYÚSCULAS */
+  letter-spacing: 1px;
+
+  /* Forma y Posición */
+  border-radius: 30px; /* Borde totalmente redondo (Pill shape) */
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* Espacio entre el icono X y el texto */
+
+  /* Sombra suave para que flote */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: all 0.3s ease; /* Animación suave */
+}
+
+/* --- INTERACCIÓN (Hover) --- */
+.btn-close:hover {
+  background-color: #ff9100; /* Se vuelve NARANJA al pasar el ratón */
+  transform: translateY(-2px); /* Se eleva un poquito */
+  box-shadow: 0 6px 15px rgba(255, 145, 0, 0.3); /* Sombra naranja brillante */
+}
+
+/* Al hacer click */
+.btn-close:active {
+  transform: translateY(0); /* Vuelve a bajar */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.zona-dinamica {
+  background-color: #ffffff;
+}

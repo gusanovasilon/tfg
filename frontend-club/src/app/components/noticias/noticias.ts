@@ -11,17 +11,25 @@ import { Noticia } from '../../interfaces/noticiasInterface';
 export class NoticiasComponent implements OnInit {
 
   listaNoticias: Noticia[] = [];
+  cargando: boolean = true;
 
-  
+
   constructor(private noticiasService: NoticiasService) { }
 
   ngOnInit(): void {
-    this.cargarNoticias();
+    this.obtenerNoticias();
   }
 
-  cargarNoticias() {
-    this.noticiasService.getNoticias().subscribe(data => {
-      this.listaNoticias = data;
+  obtenerNoticias() {
+    this.noticiasService.getNoticias().subscribe({
+      next: (data:Noticia[]) => {
+        this.listaNoticias = data;
+        this.cargando = false;
+      },
+      error: (e) => {
+        console.error('Error al cargar noticias:', e);
+        this.cargando = false;
+    }
     });
   }
 }

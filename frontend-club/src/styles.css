@@ -1,6 +1,7 @@
 
 @import "bootstrap-icons/font/bootstrap-icons.css";
 
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@400;500&display=swap');
 
 * {
     box-sizing: border-box;
@@ -9,7 +10,17 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Roboto', sans-serif;
     background-color: #f4f4f9;
     color: #333;
+
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
 }

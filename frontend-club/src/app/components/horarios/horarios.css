@@ -1,0 +1,177 @@
+/* --- CONTENEDOR PRINCIPAL --- */
+.schedule-container {
+  position: relative; /* Necesario para contener los absolutos */
+  min-height: 100vh;  /* O la altura que prefieras */
+  padding: 5rem 10%;
+  overflow: hidden;   /* Evita que nada se salga */
+  display: flex;
+  align-items: center; /* Centra el contenido verticalmente si sobra espacio */
+  justify-content: center;
+}
+
+/* FONDO (Imagen) */
+.schedule-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.bg-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* OVERLAY (Oscurecer) */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(30, 60, 114, 0.85), rgba(0, 0, 0, 0.9));
+  z-index: 1;
+}
+
+/*  CONTENIDO  */
+.schedule-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* --- CABECERA --- */
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-header h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 3rem;
+  color: white;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.highlight {
+  color: #ff9100;
+}
+
+.section-header p {
+  font-family: 'Roboto', sans-serif;
+  color: #e0e0e0;
+  letter-spacing: 1px;
+}
+
+/* --- GRID Y TARJETAS  */
+.schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.day-card {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease;
+}
+
+.day-card:hover {
+  transform: translateY(-10px);
+}
+
+.day-header {
+  background-color: #1e3c72;
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.day-header h3 {
+  font-family: 'Oswald', sans-serif;
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.classes-list {
+  padding: 1.5rem;
+}
+
+.class-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.class-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.time-badge {
+  font-family: 'Oswald', sans-serif;
+  background-color: #f0f2f5;
+  border: 2px solid #1e3c72;
+  color: #1e3c72;
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.class-info h4 {
+  margin: 0 0 0.3rem 0;
+  font-size: 1.1rem;
+  color: #2c3e50;
+  font-weight: 700;
+  font-family: 'Oswald', sans-serif;
+}
+
+.category-line {
+  display: block;
+  height: 4px;
+  width: 40px;
+  border-radius: 2px;
+}
+
+/* --- BOTÓN --- */
+.cta-schedule {
+  text-align: center;
+}
+
+.btn-download {
+  background-color: #ff9100;
+  color: white;
+  border: none;
+  padding: 1rem 3rem;
+  font-size: 1.2rem;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-download:hover {
+  background-color: #e67e22;
+  transform: translateY(-3px);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .schedule-container { padding: 4rem 5%; }
+}

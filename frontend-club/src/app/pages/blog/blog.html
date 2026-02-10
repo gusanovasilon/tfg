@@ -1,0 +1,85 @@
+<section class="news-page">
+
+  <div class="blog-hero">
+    <img src="img/suplex.jpg" alt="Fondo lucha" class="hero-bg-img">
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <a routerLink="/" class="btn-back-white">
+        <i class="bi bi-arrow-left"></i> Volver al Inicio
+      </a>
+      <h1>ACTUALIDAD DEL <span class="highlight">CLUB</span></h1>
+      <p>Crónicas, resultados y la vida diaria en el tapiz.</p>
+    </div>
+  </div>
+  <div class="container toolbar-container">
+    <div class="search-bar">
+      <input type="text" placeholder="Buscar noticia..." #txtBuscar (input)="onSearch(txtBuscar.value)">
+      <button><i class="bi bi-search"></i></button>
+    </div>
+    <div class="results-count">
+      Encontradas <strong>{{ totalResultadosFiltrados }}</strong> noticias
+    </div>
+  </div>
+
+  <div class="container content-wrapper">
+
+    @if (cargando) {
+    <div class="loading-state">
+      <p>Cargando actualidad...</p>
+    </div>
+    }
+    @else {
+    <div class="news-grid">
+
+      @for (noticia of noticiasToShow; track noticia.id) {
+      <article class="news-card">
+
+        <div class="card-image">
+          <img [src]="noticia.imagen_url ? 'img/' + noticia.imagen_url : 'img/logo.jpg'" [alt]="noticia.titulo"
+            loading="lazy">
+          <span class="category-badge">NOTICIA</span>
+        </div>
+
+        <div class="card-content">
+          <div class="card-meta">
+            📅📅 {{ noticia.fecha_publicacion}}
+          </div>
+          <h3>{{ noticia.titulo }}</h3>
+          <p>{{ noticia.contenido}}</p>
+          <a [routerLink]="['/noticias', noticia.id]" class="read-more">
+            LEER MÁS <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+
+      </article>
+      } @empty {
+      <div class="empty-state">
+        <p>No se han encontrado noticias que coincidan con "{{ terminoBusqueda }}".</p>
+      </div>
+      }
+
+    </div>
+
+    @if (totalResultadosFiltrados > 0) {
+    <div class="pagination-controls">
+
+      <button class="btn-page" (click)="cambiarPagina(-1)" [disabled]="paginaActual === 1">
+        <i class="bi bi-arrow-left"></i> Anterior
+      </button>
+
+      <span class="page-info">
+        Página {{ paginaActual }} de {{ totalPaginas }}
+      </span>
+
+      <button class="btn-page" (click)="cambiarPagina(1)" [disabled]="paginaActual >= totalPaginas">
+        Siguiente <i class="bi bi-arrow-right"></i>
+      </button>
+
+    </div>
+    }
+
+    }
+  </div>
+</section>

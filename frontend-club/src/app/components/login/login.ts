@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginData } from '../../interfaces/authInterface'; // <--- Importamos la interfaz para tipado fuerte
-import { AuthService } from '../../services/AuthService';
+import { AuthService } from '../../services/authService';
 
 @Component({
   selector: 'app-login',

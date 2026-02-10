@@ -73,27 +73,29 @@ export class AuthService {
 
   //Comprobacion rapida de si el usuario está logueado preguntando por el token
   get estaAutenticado(): boolean {
-    return !!this.token;
+    return !this.token;
   }
 
 /* Saber de manera rapida el rol para poder crear html personalizado con @if y recuperar los datos de sesion del usuario */
 
 //Administrador
-get esAdmin(): boolean {
+  get esAdmin(): boolean {
     return this.usuario?.rol === 'admin';
   }
+
 //Entrenador
   get esEntrenador(): boolean {
     return this.usuario?.rol === 'entrenador';
   }
 
-//atleta
+//Atleta
   get esAtleta(): boolean {
     return this.usuario?.rol === 'atleta';
   }
 
-//escritor
+//Escritor
   get esEscritor(): boolean {
     return this.usuario?.rol === 'escritor';
   }
+
 }

@@ -1,0 +1,158 @@
+/* Ajustes para que todo se vea como toca */
+.hero-container {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: white;
+  margin-top: -100px;
+  padding-top: 80px;
+
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+
+.bg-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}
+
+/* TARJETA CRISTAL */
+.hero-content {
+  z-index: 1;
+  width: 90%;
+  max-width: 800px;
+  text-align: center;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.158);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  padding: 3.5rem 2.5rem;
+  border-radius: 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+
+  animation: fadeInUp 1s ease-out;
+}
+
+/* TIPOGRAFÍA  */
+h1 {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  font-weight: 800;
+  color: white;
+  text-transform: uppercase;
+
+}
+
+.highlight {
+  color: #ff9100;
+  font-weight: 800;
+
+}
+
+p {
+  font-size: 1.25rem;
+  margin-bottom: 2.5rem;
+  color: #ffffff;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  line-height: 1.6;
+}
+
+/* BOTONES */
+.cta-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background-color: #e67e22;
+  color: white;
+  padding: 0.9rem 2.2rem;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #d35400;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.8); /* Borde fino */
+  padding: 0.9rem 2.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: white;
+  color: #0e305f;
+  border-color: white;
+  transform: translateY(-2px);
+}
+
+/* ANIMACIÓN */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  h1 { font-size: 2.2rem; }
+  p { font-size: 1rem; }
+  .glass-card { padding: 2rem 1.5rem; }
+  .hero-container { margin-top: 0; padding-top: 0; }
+  .glass-card {
+    margin-bottom: 50px;
+  }
+}

@@ -1,0 +1,63 @@
+@if (cargando) {
+  <div class="loading-container">
+    <p>Cargando noticia...</p>
+  </div>
+}
+
+@else if (noticia) {
+
+  <article class="detalle-page">
+
+    <header class="simple-header">
+      <div class="container header-content">
+
+        <a routerLink="/blog" class="btn-back-header">
+          <i class="bi bi-arrow-left"></i> Volver al Blog
+        </a>
+
+        <div class="meta-top">
+          <span class="badge">NOTICIA</span>
+          <span class="date">📅 {{ noticia.fecha_publicacion}}</span>
+        </div>
+
+        <h1>{{ noticia.titulo }}</h1>
+
+        @if (noticia.autor_nombre) {
+          <p class="autor">Por {{ noticia.autor_nombre }} {{ noticia.autor_apellidos }}</p>
+        }
+
+      </div>
+    </header>
+
+    <div class="container main-content">
+
+      <div class="split-layout">
+
+        <div class="col-left">
+          <figure class="news-figure">
+            <img [src]="noticia.imagen_url ? 'img/' + noticia.imagen_url : 'img/suplex.jpg'"
+                 [alt]="noticia.titulo"
+                 class="news-img">
+            <figcaption>Imagen de la noticia</figcaption>
+          </figure>
+        </div>
+
+        <div class="col-right">
+          <div class="text-body">
+            <p>{{ noticia.contenido }}</p>
+          </div>
+
+          <div class="footer-actions">
+            <a routerLink="/blog" class="btn-outline">
+              <i class="bi bi-grid"></i> Ver más noticias
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </article>
+
+}

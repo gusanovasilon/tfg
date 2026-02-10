@@ -1,0 +1,52 @@
+<app-navbar></app-navbar>
+<section id="inicio">
+  <app-hero></app-hero>
+
+</section>
+
+<section id="club">
+  <app-info-section (cambioGaleria)="mostrarGaleria($event)"></app-info-section>
+  <div id="zona-dinamica">
+
+    @if (galeriaActiva === 'equipo') {
+    <div class="fade-in">
+      <div style="text-align:right; padding: 10px container;">
+        <button (click)="galeriaActiva = ''" class="btn-close">
+          <i class="bi bi-x-lg"></i> CERRAR GALERÍA
+        </button>
+      </div>
+      <app-galeria-equipo></app-galeria-equipo>
+    </div>
+    }
+
+    @else if (galeriaActiva === 'instalaciones') {
+    <div class="fade-in">
+      <div style="text-align:right; padding: 10px container;">
+        <button (click)="galeriaActiva = ''" class="btn-close">
+          <i class="bi bi-x-lg"></i> CERRAR GALERÍA
+        </button>
+      </div>
+
+      <app-galeria-instalaciones></app-galeria-instalaciones>
+    </div>
+    }
+
+  </div>
+</section>
+
+<app-parallax-banner></app-parallax-banner>
+
+<section id="noticias">
+  <app-noticias></app-noticias>
+</section>
+
+<section id="horarios">
+  <app-horarios></app-horarios>
+</section>
+
+
+<section id="contacto">
+  <app-contacto></app-contacto>
+</section>
+
+<app-footer></app-footer>

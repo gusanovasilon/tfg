@@ -1,0 +1,16 @@
+/* --- LOADING CONTAINER --- */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh; /* Ocupa buena parte de la pantalla */
+  background-color: #ffffff; /* O #f4f6f8 si prefieres el gris suave */
+  gap: 20px; /* Espacio entre el spinner y el texto */
+}
+
+body{
+  background-color: #ffffff
+}
+
+

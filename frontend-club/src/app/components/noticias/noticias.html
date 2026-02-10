@@ -1,22 +1,54 @@
-<div class="container">
-  <h2 class="titulo-seccion">
-    <i class="bi bi-newspaper"></i> Últimas Noticias
-  </h2>
+<section class="news-section">
+  <div class="container">
 
-  <div class="noticias-grid">
+    <div class="section-header">
+      <h2>ÚLTIMAS <span class="highlight">NOTICIAS</span></h2>
+      <p>ACTUALIDAD, RESULTADOS Y EVENTOS DEL CLUB</p>
+    </div>
 
-    <article class="news-card" *ngFor="let noticia of listaNoticias">
-      <div class="card-header">
-        <span class="fecha"><i class="bi bi-calendar-event"></i> {{ noticia.fecha_publicacion }}</span>
-      </div>
-      <div class="card-body">
-        <h3>{{ noticia.titulo }}</h3>
-        <p>{{ noticia.contenido }}</p>
-      </div>
-      <div class="card-footer">
-        <button class="btn-leer">Leer más <i class="bi bi-arrow-right"></i></button>
-      </div>
-    </article>
+    @if (cargando) {
+    <div class="loading-state">
+      <p>Cargando actualidad...</p>
+    </div>
+    }
+
+    <div class="news-grid">
+
+      @for (noticia of listaNoticias | slice:0:3; track noticia.id) {
+      <article class="news-card">
+
+        <div class="card-image">
+          <img [src]="noticia.imagen_url ? './img/' + noticia.imagen_url : 'img/logo.jpg'" alt="{{ noticia.titulo }}">
+
+          <div class="category-badge">NOTICIA</div>
+        </div>
+
+        <div class="card-content">
+          <div class="card-meta">
+            <i class="bi bi-calendar-event"></i> {{ noticia.fecha_publicacion | date:'dd MMM yyyy' }}
+          </div>
+
+          <h3>{{ noticia.titulo }}</h3>
+
+          <p>{{ noticia.contenido | slice:0:100 }}{{ noticia.contenido.length > 100 ? '...' : '' }}</p>
+
+          <a [routerLink]="['/noticias', noticia.id]" class="read-more">
+            LEER NOTICIA <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+
+      </article>
+      }
+
+      @if (!cargando && listaNoticias.length === 0) {
+      <p class="no-news">No hay noticias recientes.</p>
+      }
+
+    </div>
+
+    <div class="cta-news">
+      <button class="btn-outline" routerLink="/blog">VER BLOG COMPLETO</button>
+    </div>
 
   </div>
-</div>
+</section>

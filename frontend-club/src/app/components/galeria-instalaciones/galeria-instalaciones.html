@@ -1,0 +1,16 @@
+<section class="team-section">
+  <div class="container">
+    <h2 class="team-title">NUESTRAS <span class="highlight">INSTALACIONES</span></h2>
+
+    <div class="team-grid">
+      @for (instalacion of fotosInstalaciones; track instalacion.id) {
+        <div class="team-card">
+          <div class="img-wrapper">
+             <img [src]="'img/' + instalacion.imagen_url" [alt]="instalacion.titulo">
+          </div>
+          <h3>{{ instalacion.titulo }}</h3>
+        </div>
+      }
+    </div>
+  </div>
+</section>

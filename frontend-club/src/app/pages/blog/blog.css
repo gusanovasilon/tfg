@@ -1,0 +1,321 @@
+/* --- 1. CONFIGURACIÓN GENERAL --- */
+.news-page {
+  background-color: #f4f6f8;
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+.highlight {
+  color: #ff9100;
+}
+
+/* --- 2. HERO BANNER (Contenedor Principal) --- */
+.blog-hero {
+  position: relative; /* Necesario para que lo de dentro se posicione absoluto */
+  height: 45vh;
+  min-height: 400px;
+  background-color: #1e3c72; /* Color de fondo de seguridad por si falla la imagen */
+
+  /* Flexbox para centrar el contenido */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  color: white;
+
+  margin-bottom: -40px; /* Para que la barra de búsqueda se monte encima */
+  overflow: hidden; /* IMPORTANTE: Para que la imagen no se salga si haces zoom */
+}
+
+/* NUEVA CLASE: La imagen actuando como fondo */
+.hero-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Hace que la imagen rellene todo sin deformarse */
+  z-index: 0; /* Al fondo del todo */
+}
+
+/* La capa oscura va encima de la imagen */
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(to bottom, rgba(30, 60, 114, 0.6), rgba(30, 60, 114, 0.9));
+  z-index: 1; /* Encima de la imagen (0) pero debajo del texto (2) */
+}
+
+/* El texto va encima de todo */
+.hero-content {
+  position: relative;
+  z-index: 2; /* Encima de la capa oscura */
+  padding: 20px;
+  max-width: 800px;
+}
+
+.hero-content h1 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 15px 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  letter-spacing: 1px;
+}
+
+/* Botón "Volver al Inicio" */
+.btn-back-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.9);
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.4);
+  padding: 8px 20px;
+  border-radius: 30px;
+  transition: all 0.3s;
+  backdrop-filter: blur(5px);
+}
+
+.btn-back-white:hover {
+  background: white;
+  color: #1e3c72;
+}
+
+/* --- 3. BARRA DE HERRAMIENTAS --- */
+.toolbar-container {
+  position: relative;
+  z-index: 10;
+  background: white;
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto 50px auto;
+}
+
+.search-bar {
+  display: flex;
+  background: #f4f6f8;
+  border-radius: 5px;
+  padding: 5px;
+  flex-grow: 1;
+  max-width: 500px;
+}
+
+.search-bar input {
+  border: none;
+  background: transparent;
+  padding: 10px 15px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #333;
+}
+
+.search-bar button {
+  background: #1e3c72;
+  color: white;
+  border: none;
+  width: 50px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.search-bar button:hover {
+  background: #ff9100;
+}
+
+.results-count {
+  color: #7f8c8d;
+  font-weight: 500;
+  margin-left: 20px;
+}
+
+/* --- 4. GRID Y TARJETAS --- */
+.content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.news-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 480px; /* Tamaño fijo */
+  display: flex;
+  flex-direction: column;
+}
+
+.news-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.card-image {
+  height: 200px;
+  width: 100%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.category-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #ff9100;
+  color: white;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.card-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Ocupa el espacio sobrante */
+  justify-content: space-between; /* Distribuye elementos */
+}
+
+.card-meta {
+  font-size: 0.85rem;
+  color: #999;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.card-content h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.25rem;
+  color: #1e3c72;
+  margin: 0 0 10px 0;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-content p {
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 15px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Corta a las 3 líneas */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.read-more {
+  text-decoration: none;
+  color: #1e3c72;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.3s;
+  margin-top: auto;
+}
+
+.read-more:hover {
+  color: #ff9100;
+}
+
+/* --- 5. PAGINACIÓN --- */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+}
+
+.btn-page {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 10px 25px;
+  border-radius: 30px;
+  color: #1e3c72;
+  font-family: 'Oswald', sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s;
+}
+
+.btn-page:hover:not([disabled]) {
+  background: #1e3c72;
+  color: white;
+  border-color: #1e3c72;
+  transform: translateY(-2px);
+}
+
+.btn-page:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #f0f0f0;
+}
+
+.page-info {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  color: #555;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px;
+  font-size: 1.2rem;
+  color: #7f8c8d;
+  background: white;
+  border-radius: 8px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-content h1 { font-size: 2.5rem; }
+  .toolbar-container { flex-direction: column; gap: 15px; padding: 20px; }
+  .search-bar { width: 100%; max-width: 100%; }
+  .results-count { margin-left: 0; }
+  .news-card { height: auto; min-height: 450px; }
+}

@@ -1,0 +1,189 @@
+/* --- SECCIÓN GENERAL --- */
+.contact-section {
+  background-color: #f9f9f9; /* Gris muy claro para diferenciar de Horarios */
+  padding-top: 5rem;
+  /* El padding bottom es 0 porque el mapa va pegado al footer */
+  padding-bottom: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 5% 4rem 5%; /* Padding lateral y bottom */
+}
+
+/* --- CABECERA --- */
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-header h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 3rem;
+  color: #1e3c72;
+}
+
+.highlight { color: #ff9100; }
+
+.section-header p {
+  color: #7f8c8d;
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 1px;
+}
+
+/* --- GRID --- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* --- COLUMNA INFO --- */
+.info-card h3 {
+  font-family: 'Oswald', sans-serif;
+  color: #1e3c72;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.intro-text {
+  color: #555;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.icon-circle {
+  width: 50px;
+  height: 50px;
+  background-color: #e3f2fd;
+  color: #1e3c72;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transition: all 0.3s;
+}
+
+.info-item:hover .icon-circle {
+  background-color: #ff9100;
+  color: white;
+}
+
+.info-text h4 {
+  margin: 0;
+  color: #1e3c72;
+  font-family: 'Oswald', sans-serif;
+}
+
+.info-text p {
+  margin: 5px 0 0 0;
+  color: #666;
+}
+
+/* Redes Sociales */
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.social-btn {
+  width: 45px;
+  height: 45px;
+  background-color: #1e3c72;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  transition: all 0.3s;
+}
+
+.social-btn:hover {
+  background-color: #ff9100;
+  transform: translateY(-3px);
+}
+
+/* --- COLUMNA FORMULARIO --- */
+.form-card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Sombra suave elegante */
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #34495e;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  transition: border 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #ff9100; /* Naranja al escribir */
+}
+
+.btn-submit {
+  width: 100%;
+  background-color: #ff9100;
+  color: white;
+  border: none;
+  padding: 1rem;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-submit:hover {
+  background-color: #e67e22;
+}
+
+/* --- MAPA --- */
+.map-container {
+  width: 100%;
+  line-height: 0;
+  transition: filter 0.5s;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .form-card { padding: 1.5rem; }
+}

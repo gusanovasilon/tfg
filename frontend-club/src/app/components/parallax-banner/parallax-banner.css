@@ -1,0 +1,59 @@
+/* 1. EL CONTENEDOR PADRE */
+.seccion-con-fondo {
+  position: relative;
+  height: 500px; /* Altura que quieras para la sección */
+  width: 100%;
+
+  /* --- AQUÍ ESTÁ LA MAGIA --- */
+  /* Esto crea una "ventana" de recorte.
+     Obliga a los elementos 'fixed' de dentro a verse SOLO dentro de esta caja. */
+  clip-path: inset(0);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 2. LA IMAGEN (EL EFECTO PARALLAX) */
+.bg-media {
+  /* Al ponerlo fixed, la imagen se pega a la PANTALLA del usuario, no a la web */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  /* Ajuste de imagen */
+  object-fit: cover;
+  object-position: center;
+
+  /* Se va al fondo */
+  z-index: -1;
+
+  /* (Opcional) Un poco de brillo/contraste si la foto es muy plana */
+  filter: brightness(0.6);
+}
+
+/* 3. EL CONTENIDO (TEXTO) */
+.schedule-content {
+  position: relative;
+
+  z-index: 2;
+  color: white;
+  text-align: center;
+  /* Sombras para asegurar lectura */
+  text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+}
+
+h2, p {
+  font-size: 3rem;
+}
+.schedule-bg {
+  /* Este div ya no necesita estilos especiales,
+     la magia la hace la imagen directa y el padre */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

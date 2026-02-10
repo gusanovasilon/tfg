@@ -7,7 +7,7 @@ class NoticiasModel extends Model
     protected $table = 'noticias';
     protected $primaryKey = 'id';
     
-    protected $allowedFields = ['titulo', 'contenido', 'imagen_url', 'autor_id', 'created_at'];
+    protected $allowedFields = ['titulo', 'contenido', 'imagen_url', 'autor_id', 'fecha_publicacion'];
 
     
     public function getNoticias($id = null)
@@ -22,6 +22,6 @@ class NoticiasModel extends Model
         
         /* ordenamos de por fecha de creacion */
 
-        return $this->orderBy('created_at', 'DESC')->findAll();
+        return $this->orderBy('fecha_publicacion', 'DESC')->findAll();
     }
 }

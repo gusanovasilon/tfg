@@ -1,0 +1,81 @@
+/* --- CONTENEDOR PRINCIPAL (GRID) --- */
+.team-section {
+  padding: 40px 20px;
+  background-color: white; /* O el color que prefieras */
+}
+
+.team-title {
+  text-align: center;
+  font-family: 'Oswald', sans-serif;
+  font-size: 2.5rem;
+  color: #1e3c72;
+  margin-bottom: 40px;
+}
+.highlight { color: #ff9100; }
+
+/* --- LA REJILLA (Igual que instalaciones) --- */
+.team-grid {
+  display: grid;
+  /* Crea columnas automáticas de mínimo 250px. Si cabe más, pone más. */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 25px; /* Separación entre fotos */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- LA TARJETA INDIVIDUAL --- */
+.team-card {
+  display: flex;
+  flex-direction: column;
+  /* Ya no le ponemos ancho fijo, dejamos que la Grid mande */
+}
+
+/* --- EL MARCO DE LA FOTO (El Cuadrado Perfecto) --- */
+.img-wrapper {
+  width: 100%;
+
+  /* ESTA ES LA CLAVE DEL CUADRADO: */
+  aspect-ratio: 1 / 1;
+
+  overflow: hidden;
+  border-radius: 8px; /* Bordes ligeramente redondeados, pero cuadrado */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  margin-bottom: 15px;
+  background-color: #ffffff; /* Fondo gris mientras carga */
+  position: relative;
+}
+
+/* --- LA FOTO DENTRO --- */
+.img-wrapper img {
+  width: 100%;
+  height: 100%;
+
+  /* RECORTA LA FOTO PARA LLENAR EL CUADRADO */
+  object-fit: cover;
+
+  /* IMPORTANTE: Enfoca la parte de arriba (las caras), no el centro (el pecho) */
+  object-position: top center;
+
+  transition: transform 0.5s ease;
+}
+
+/* Efecto Zoom al pasar el ratón */
+.team-card:hover .img-wrapper img {
+  transform: scale(1.05);
+}
+
+/* --- TEXTOS (Nombre y Rol) --- */
+.team-card h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.2rem;
+  color: #1e3c72;
+  margin: 0 0 5px 0;
+  text-transform: uppercase;
+}
+
+.team-card p {
+  color: #ff9100; /* Naranja corporativo */
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin: 0;
+}

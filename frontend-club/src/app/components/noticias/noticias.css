@@ -1,80 +1,164 @@
-/* Contenedor principal */
+/* --- SECCIÓN GENERAL --- */
+.news-section {
+  padding: 5rem 5%;
+  background-color: #f4f6f8; /* Gris muy suave para diferenciar del blanco */
+}
+
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.titulo-seccion {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: #2c3e50;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+/* --- CABECERA --- */
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
 }
 
-/* --- MAGIA CSS GRID --- */
-/* Esto reemplaza a "row" y "col-md-4" de forma automática */
-.noticias-grid {
-    display: grid;
-    /* Crea columnas automáticas de mínimo 300px. Si no caben, bajan de línea */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px; /* Espacio entre tarjetas */
+.section-header h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 3rem;
+  color: #1e3c72;
 }
 
-/* --- DISEÑO DE TARJETA --- */
+.highlight { color: #ff9100; }
+
+.section-header p {
+  font-family: 'Roboto', sans-serif;
+  color: #7f8c8d;
+  letter-spacing: 1px;
+}
+
+/* --- GRID --- */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive automático */
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* --- TARJETA --- */
 .news-card {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Sombra suave */
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column; /* Para empujar el footer abajo */
+  background: white;
+  border-radius: 8px;
+  overflow: hidden; /* Para que la imagen no se salga al hacer zoom */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Efecto Hover (Interacción UX) */
 .news-card:hover {
-    transform: translateY(-5px); /* Sube un poco al pasar el ratón */
-    box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+  transform: translateY(-10px); /* Sube un poco */
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
 }
 
-.card-body {
-    padding: 20px;
-    flex-grow: 1; /* Ocupa el espacio disponible */
+/* IMAGEN Y ZOOM */
+.card-image {
+  height: 220px;
+  overflow: hidden;
+  position: relative;
 }
 
-.card-body h3 {
-    margin-bottom: 10px;
-    color: #e67e22; /* El naranja de tu moodboard */
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease; /* Transición suave del zoom */
 }
 
-.fecha {
-    font-size: 0.85rem;
-    color: #7f8c8d;
-    padding: 15px 20px 0;
-    display: block;
+/* Al poner el ratón sobre la tarjeta, la imagen crece */
+.news-card:hover .card-image img {
+  transform: scale(1.1);
 }
 
-.card-footer {
-    padding: 15px 20px;
-    background-color: #f8f9fa;
-    border-top: 1px solid #eee;
-    text-align: right;
+/* ETIQUETA CATEGORÍA */
+.category-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #ff9100;
+  color: white;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-family: 'Oswald', sans-serif;
 }
 
-/* Botón personalizado (sin btn-primary de bootstrap) */
-.btn-leer {
-    background-color: #2980b9; /* Azul del moodboard */
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.2s;
+/* --- CONTENIDO TARJETA --- */
+.card-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Ocupa el espacio restante */
 }
 
-.btn-leer:hover {
-    background-color: #1c5980;
+.card-meta {
+  color: #95a5a6;
+  font-size: 0.85rem;
+  margin-bottom: 0.8rem;
+  font-weight: 500;
+}
+
+.card-content h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.3rem;
+  color: #2c3e50;
+  margin-bottom: 0.8rem;
+  line-height: 1.3;
+}
+
+.card-content p {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  flex-grow: 1; /* Empuja el botón hacia abajo */
+}
+
+/* ENLACE LEER MÁS */
+.read-more {
+  color: #1e3c72;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  font-family: 'Oswald', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.3s;
+}
+
+.read-more:hover {
+  color: #ff9100;
+}
+
+/* --- BOTÓN FINAL (VER TODAS) --- */
+.cta-news {
+  text-align: center;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid #1e3c72;
+  color: #1e3c72;
+  padding: 0.8rem 2rem;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-radius: 4px;
+}
+
+.btn-outline:hover {
+  background-color: #1e3c72;
+  color: white;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .news-section { padding: 3rem 5%; }
 }

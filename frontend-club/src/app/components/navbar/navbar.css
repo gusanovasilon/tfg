@@ -1,0 +1,238 @@
+/* --- CONTENEDOR PRINCIPAL --- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 5%;
+
+  /* ESTADO INICIAL (ARRIBA DEL TODO): TRANSPARENTE */
+  background-color: rgba(14, 48, 95, 0.952);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  /* TRANSICIÓN SUAVE: Para que el cambio de color no sea brusco */
+  transition: all 0.4s ease;
+
+}
+
+.navbar.scrolled {
+  padding: 0.8rem 5%;
+  background-color: rgba(14, 48, 95, 0.95);
+
+
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border-bottom: none;
+}
+
+/* --- LOGO --- */
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+
+.img-logo {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* --- TEXTO DEL LOGO --- */
+.text-logo {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  color: #ffffff;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+/* --- MENÚ DE NAVEGACIÓN --- */
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 2.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #ffffff; 
+  font-weight: 500;
+  font-size: 1.1rem; /* Grande pero equilibrado */
+  transition: color 0.2s ease;
+}
+
+/* Hover simple: Solo cambia a blanco o naranja suave */
+.menu a:hover, .menu a.active {
+  color: #ff9100;
+  /* Si quieres que se note cuál está activo, podemos usar el naranja pero sutil */
+  /* color: #e67e22; */
+}
+
+/* --- BOTONES DE ACCESO (Auth) --- */
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 1rem;
+  color: #ecf0f1;
+}
+
+/* Botón: Acceso Atletas (Estilo "Ghost" - Muy elegante) */
+.btn-login {
+  background-color: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.6); /* Borde fino semitransparente */
+  padding: 0.6rem 1.4rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 6px; /* Bordes ligeramente redondeados, no redondos totales */
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-login:hover {
+  background-color: rgba(252, 137, 6, 0.884); /* Fondo sutil al pasar */
+  border-color: #ffffff;
+
+}
+
+/* Botón: Ir al Panel (Estilo Sólido pero mate) */
+.btn-dashboard {
+  background-color: #e67e22; /* Naranja corporativo plano */
+  color: white;
+  border: none;
+  padding: 0.6rem 1.4rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 6px; /* Rectángulo redondeado */
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-dashboard:hover {
+  background-color: #d35400; /* Un poco más oscuro al pasar, sin saltos */
+}
+
+/* Botón: Salir (Minimalista) */
+.btn-logout {
+  background: none;
+  border: none;
+  color: #95a5a6; /* Gris apagado */
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 5px;
+  transition: color 0.2s;
+}
+
+.btn-logout:hover {
+  color: #e74c3c; /* Rojo suave solo al pasar el ratón */
+}
+
+/* --- RESPONSIVE --- */
+/* ... Tus estilos base del navbar (logo, scroll, etc) se mantienen ... */
+
+/* BOTÓN HAMBURGUESA (Oculto por defecto en PC) */
+.hamburger-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001; /* Por encima de todo */
+}
+
+/* --- RESPONSIVE (MÓVIL) --- */
+@media (max-width: 768px) {
+
+  /* 1. Mostramos el botón hamburguesa */
+  .hamburger-btn {
+    display: block;
+  }
+
+  /* 2. El menú se convierte en un panel desplegable */
+  .menu {
+    position: absolute;
+    top: 100%; /* Justo debajo de la barra */
+    left: 0;
+    width: 100%;
+    background-color: #1a2a40; /* Azul oscuro sólido (importante para leerse) */
+
+    flex-direction: column; /* Vertical */
+    align-items: center;
+    padding: 2rem 0;
+    gap: 2rem;
+
+    /* Efecto de transición (Slide Down) */
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.3);
+  }
+
+  /* 3. CLASE ACTIVE: Cuando abrimos el menú */
+  .menu.active {
+    max-height: 500px; /* Altura suficiente para ver todo */
+    opacity: 1;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  /* 4. Ajustes de los enlaces en móvil */
+  .menu li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .menu a {
+    display: block;
+    padding: 10px;
+    font-size: 1.3rem; /* Letra más grande para tocar con el dedo */
+  }
+
+  /* 5. Ocultamos los botones de Auth de escritorio si estaban fuera */
+  .auth-buttons {
+    display: none;
+    /* Nota: He movido la lógica de auth DENTRO del .menu en el HTML para móvil */
+  }
+
+  /* Estilos para la zona de usuario en móvil */
+  .mobile-auth {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .user-info-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    color: white;
+  }
+}

@@ -1,0 +1,167 @@
+/* --- CONFIGURACIÓN GENERAL --- */
+.detalle-page {
+  background-color: #fff;
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+/* --- 1. HEADER (Separado y Azul) --- */
+.simple-header {
+  background-color: #1e3c72; /* Azul corporativo sólido */
+  color: white;
+  padding: 60px 0; /* Espacio vertical generoso */
+  margin-bottom: 50px; /* Separación con el contenido de abajo */
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Botón Volver */
+.btn-back-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  transition: color 0.3s;
+}
+.btn-back-header:hover { color: #ff9100; }
+
+/* Metadatos */
+.meta-top {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.badge {
+  background-color: #ff9100;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.date {
+  font-size: 0.95rem;
+  opacity: 0.9;
+  text-transform: uppercase;
+}
+
+/* Título Header */
+h1 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2.8rem;
+  line-height: 1.2;
+  margin-bottom: 10px;
+  max-width: 900px; /* Para que no se estire demasiado si es corto */
+}
+
+.autor {
+  font-size: 1.1rem;
+  opacity: 0.8;
+  font-style: italic;
+}
+
+/* --- 2. LAYOUT DIVIDIDO (Foto | Texto) --- */
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.split-layout {
+  display: grid;
+  /* La magia: 40% para la foto, 60% para el texto */
+  grid-template-columns: 40% 1fr;
+  gap: 50px; /* Espacio entre foto y texto */
+  align-items: start; /* Alineados arriba */
+}
+
+/* --- COLUMNA IZQUIERDA (Foto) --- */
+.news-figure {
+  margin: 0;
+  /* Hacemos que la imagen sea 'Sticky' para que te persiga al bajar */
+  position: sticky;
+  top: 30px;
+}
+
+.news-img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  object-fit: cover;
+}
+
+figcaption {
+  margin-top: 10px;
+  color: #888;
+  font-size: 0.9rem;
+  text-align: center;
+  font-style: italic;
+}
+
+/* --- COLUMNA DERECHA (Texto) --- */
+.text-body p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #333;
+  white-space: pre-wrap; /* Mantiene párrafos */
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+/* Footer (Botón volver abajo) */
+.footer-actions {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #1e3c72;
+  border: 2px solid #1e3c72;
+  padding: 10px 25px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+.btn-outline:hover {
+  background-color: #1e3c72;
+  color: white;
+}
+
+/* --- RESPONSIVE (MÓVIL) --- */
+@media (max-width: 900px) {
+  .split-layout {
+    /* En móvil, una sola columna */
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  /* En móvil, la foto va arriba normal, sin sticky */
+  .news-figure { position: static; }
+
+  .simple-header { padding: 40px 0; }
+  h1 { font-size: 2rem; }
+}
+
+
+
+

@@ -1,42 +1,41 @@
-<nav class="navbar" [class.scrolled] = 'isScrolled'>
+<nav class="navbar" [class.scrolled]='isScrolled'>
   <div class="logo" routerLink="/">
 
-  <img src="img/logo.jpg" alt="Escudo Club" class="img-logo">
+    <img src="img/logo.jpg" alt="Escudo Club" class="img-logo">
 
-  <span class="text-logo">WRESTLING QUART</span>
+    <span class="text-logo">WRESTLING QUART</span>
 
-</div>
+  </div>
 
   <ul class="menu">
     @for (item of menuItems; track item.ruta) {
-      <li>
-        <a [routerLink]="item.ruta"
-           [fragment]="item.fragmento">
-           {{ item.nombre }}
-        </a>
-      </li>
+    <li>
+      <a [routerLink]="item.ruta" [fragment]="item.fragmento">
+        {{ item.nombre }}
+      </a>
+    </li>
     }
   </ul>
 
   <div class="auth-buttons">
 
     @if (!auth.estaAutenticado) {
-      <button class="btn-login" routerLink="/login">
-        Acceso Atletas
-      </button>
+    <button class="btn-login" routerLink="/login">
+      Acceso Atletas
+    </button>
 
     } @else {
-      <div class="user-info">
-        <span>Hola, {{ auth.usuario?.nombre }}</span>
+    <div class="user-info">
+      <span>{{ auth.usuario?.nombre }}</span>
 
-        <button class="btn-dashboard" routerLink="/dashboard">
-          Ir al Panel
-        </button>
+      <button class="btn-dashboard" routerLink="/dashboard">
+        Ir al Panel
+      </button>
 
-        <button class="btn-logout" (click)="logout()">
-          <i class="fa fa-sign-out"></i>
-        </button>
-      </div>
+      <button class="btn-logout" (click)="logout()" title="Cerrar Sesión">
+        <i class="bi bi-box-arrow-right"></i>
+      </button>
+    </div>
     }
 
   </div>

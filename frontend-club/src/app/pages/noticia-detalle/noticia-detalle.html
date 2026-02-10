@@ -11,10 +11,6 @@
     <header class="simple-header">
       <div class="container header-content">
 
-        <a routerLink="/blog" class="btn-back-header">
-          <i class="bi bi-arrow-left"></i> Volver al Blog
-        </a>
-
         <div class="meta-top">
           <span class="badge">NOTICIA</span>
           <span class="date">📅 {{ noticia.fecha_publicacion}}</span>
@@ -50,6 +46,9 @@
           <div class="footer-actions">
             <a routerLink="/blog" class="btn-outline">
               <i class="bi bi-grid"></i> Ver más noticias
+            </a>
+            <a routerLink="/" class="btn-outline">
+              <i class="bi bi-grid"></i> Volver a la Página
             </a>
           </div>
         </div>

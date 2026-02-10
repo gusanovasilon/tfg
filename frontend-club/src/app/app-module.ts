@@ -6,7 +6,7 @@ import { App } from './app';
 import { NoticiasComponent } from './components/noticias/noticias';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import {LoginComponent } from './components/login/login';
+
 import { NavbarComponent } from './components/navbar/navbar';
 import { HeroComponent } from './components/hero/hero';
 import { Home } from './pages/home/home';
@@ -27,16 +27,15 @@ import { GaleriaEquipo } from './components/galeria-equipo/galeria-equipo';
   declarations: [
     App,
     NoticiasComponent,
-    LoginComponent,
     NavbarComponent,
     HeroComponent,
     Home,
-    Login,
     Dashboard,
     InfoSection,
     Horarios,
     Contacto,
     Footer,
+    Login,
     ParallaxBanner,
     Blog,
     NoticiaDetalle,

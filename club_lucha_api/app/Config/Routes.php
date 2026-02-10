@@ -3,8 +3,9 @@
 use CodeIgniter\Router\RouteCollection;
 use App\Controllers\Api\Auth;
 use App\Controllers\Api\Noticias;
-use App\Controllers\Api\Entrenamientos; // <--- 1. AÑADE ESTO
+use App\Controllers\Api\Entrenamientos; 
 use App\Controllers\Api\Galeria;
+use App\Controllers\Api\MensajeContacto;
 
 /**
  * @var RouteCollection $routes
@@ -32,3 +33,4 @@ $routes->get('api/noticias/(:num)', [Noticias::class, 'detalle']);
 $routes->get('api/entrenamientos', [Entrenamientos::class, 'index']);
 $routes->get('api/entrenamientos/(:num)', [Entrenamientos::class, 'detalle']);
 $routes->get('api/galeria', [Galeria::class, 'index']);
+$routes->post('api/contacto', [MensajeContacto::class, 'create']);

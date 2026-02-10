@@ -1,189 +1,157 @@
-/* --- SECCIÓN GENERAL --- */
-.contact-section {
-  background-color: #f9f9f9; /* Gris muy claro para diferenciar de Horarios */
-  padding-top: 5rem;
-  /* El padding bottom es 0 porque el mapa va pegado al footer */
-  padding-bottom: 0;
+/* --- 1. CONFIGURACIÓN DE LA SECCIÓN --- */
+.contacto-section {
+  background-color: #f9f9f9; /* Gris muy suave de fondo */
+  padding: 80px 0;
+  min-height: 80vh; /* Para que ocupe bastante pantalla */
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 800px; /* Ancho limitado para que el formulario no sea eterno */
   margin: 0 auto;
-  padding: 0 5% 4rem 5%; /* Padding lateral y bottom */
+  padding: 0 20px;
 }
 
-/* --- CABECERA --- */
-.section-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.section-header h2 {
+/* --- 2. CABECERA (Títulos) --- */
+h2 {
   font-family: 'Oswald', sans-serif;
   font-size: 3rem;
   color: #1e3c72;
+  text-align: center;
+  margin-bottom: 10px;
+  text-transform: uppercase;
 }
 
-.highlight { color: #ff9100; }
+.highlight {
+  color: #ff9100; /* Tu naranja corporativo */
+}
 
-.section-header p {
+.subtitle {
+  text-align: center;
   color: #7f8c8d;
   font-family: 'Roboto', sans-serif;
-  letter-spacing: 1px;
+  font-size: 1.1rem;
+  margin-bottom: 50px; /* Separación con el formulario */
 }
 
-/* --- GRID --- */
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: start;
-}
-
-/* --- COLUMNA INFO --- */
-.info-card h3 {
-  font-family: 'Oswald', sans-serif;
-  color: #1e3c72;
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-}
-
-.intro-text {
-  color: #555;
-  margin-bottom: 2rem;
-  line-height: 1.6;
-}
-
-.info-item {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.icon-circle {
-  width: 50px;
-  height: 50px;
-  background-color: #e3f2fd;
-  color: #1e3c72;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  transition: all 0.3s;
-}
-
-.info-item:hover .icon-circle {
-  background-color: #ff9100;
-  color: white;
-}
-
-.info-text h4 {
-  margin: 0;
-  color: #1e3c72;
-  font-family: 'Oswald', sans-serif;
-}
-
-.info-text p {
-  margin: 5px 0 0 0;
-  color: #666;
-}
-
-/* Redes Sociales */
-.social-links {
-  display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
-}
-
-.social-btn {
-  width: 45px;
-  height: 45px;
-  background-color: #1e3c72;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  font-size: 1.2rem;
-  transition: all 0.3s;
-}
-
-.social-btn:hover {
-  background-color: #ff9100;
-  transform: translateY(-3px);
-}
-
-/* --- COLUMNA FORMULARIO --- */
-.form-card {
+/* --- 3. LA TARJETA DEL FORMULARIO --- */
+.form-contacto {
   background: white;
-  padding: 2.5rem;
+  padding: 40px; /* Espacio interior generoso */
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Sombra suave elegante */
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08); /* Sombra elegante */
 }
 
+/* --- 4. INPUTS Y LABELS --- */
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 25px; /* Espacio entre preguntas */
 }
 
 .form-group label {
   display: block;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: #34495e;
-  font-size: 0.9rem;
+  font-family: 'Oswald', sans-serif; /* Títulos en Oswald quedan mejor */
+  font-size: 1rem;
+  color: #1e3c72;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
   width: 100%;
-  padding: 12px;
+  padding: 14px; /* Inputs cómodos de pulsar */
   border: 1px solid #ddd;
   border-radius: 6px;
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
-  transition: border 0.3s;
+  color: #333;
+  background-color: #fdfdfd;
+  transition: all 0.3s ease;
+  box-sizing: border-box; /* Importante para que el padding no rompa el ancho */
 }
 
+/* Efecto al hacer click en un input */
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #ff9100; /* Naranja al escribir */
+  border-color: #ff9100; /* Borde naranja */
+  background-color: white;
+  box-shadow: 0 0 0 4px rgba(255, 145, 0, 0.1); /* Resplandor suave naranja */
 }
 
-.btn-submit {
+/* El select a veces necesita un ajuste de altura */
+.form-group select {
+  cursor: pointer;
+  height: 50px;
+}
+
+/* --- 5. BOTÓN DE ENVIAR --- */
+.btn-enviar {
   width: 100%;
-  background-color: #ff9100;
+  background-color: #1e3c72; /* Azul corporativo */
   color: white;
   border: none;
-  padding: 1rem;
+  padding: 16px;
   font-family: 'Oswald', sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 1px;
   border-radius: 6px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  text-transform: uppercase;
 }
 
-.btn-submit:hover {
-  background-color: #e67e22;
+.btn-enviar:hover:not(:disabled) {
+  background-color: #ff9100; /* Naranja al pasar el ratón */
+  transform: translateY(-2px); /* Efecto de elevación */
+  box-shadow: 0 5px 15px rgba(255, 145, 0, 0.3);
 }
 
-/* --- MAPA --- */
-.map-container {
-  width: 100%;
-  line-height: 0;
-  transition: filter 0.5s;
+.btn-enviar:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* --- 6. MENSAJES DE ALERTA (Éxito / Error) --- */
+.alert {
+  padding: 15px;
+  margin-top: 25px;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 500;
   display: flex;
+  align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  gap: 10px;
+  animation: fadeIn 0.5s ease-out;
 }
 
+.success {
+  background-color: #d4edda;
+  color: #155724; /* Verde oscuro */
+  border: 1px solid #c3e6cb;
+}
 
-/* RESPONSIVE */
+.error {
+  background-color: #f8d7da;
+  color: #721c24; /* Rojo oscuro */
+  border: 1px solid #f5c6cb;
+}
+
+/* Animación para que la alerta aparezca suave */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- RESPONSIVE --- */
 @media (max-width: 768px) {
-  .contact-grid { grid-template-columns: 1fr; }
-  .form-card { padding: 1.5rem; }
+  .contacto-section { padding: 40px 0; }
+  .form-contacto { padding: 25px; }
+  h2 { font-size: 2.2rem; }
+  .btn-enviar { font-size: 1rem; }
 }

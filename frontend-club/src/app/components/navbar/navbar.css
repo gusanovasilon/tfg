@@ -68,7 +68,7 @@
 
 .menu a {
   text-decoration: none;
-  color: #ffffff; 
+  color: #ffffff;
   font-weight: 500;
   font-size: 1.1rem; /* Grande pero equilibrado */
   transition: color 0.2s ease;
@@ -160,6 +160,77 @@
   cursor: pointer;
   padding: 0;
   z-index: 1001; /* Por encima de todo */
+}
+
+/* --- ZONA DE USUARIO LOGUEADO --- */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Separación entre elementos */
+}
+
+.user-info span {
+  color: #ffffff;
+  font-weight: 600;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+/* Botón "Ir al Panel" */
+.btn-dashboard {
+  background-color: #1e3c72;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.9rem;
+  transition: background 0.3s;
+  text-decoration: none;
+}
+
+.btn-dashboard:hover {
+  background-color: #ff9100;
+}
+
+/* Botón "Logout" (Solo Icono o Pequeño) */
+.btn-logout {
+  background-color: #ffebee; /* Fondo rojizo muy suave */
+  color: #c62828; /* Rojo oscuro */
+  border: 1px solid #ef9a9a;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%; /* Redondo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-logout:hover {
+  background-color: #c62828;
+  color: white;
+  
+}
+
+/* Ajuste Responsive para móvil */
+@media (max-width: 768px) {
+  .user-info {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .btn-logout {
+    width: 100%; /* En móvil botón ancho */
+    border-radius: 4px;
+    background-color: #c62828;
+    color: white;
+  }
 }
 
 /* --- RESPONSIVE (MÓVIL) --- */

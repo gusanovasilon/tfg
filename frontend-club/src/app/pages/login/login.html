@@ -1,1 +1,60 @@
-<p>login works!</p>
+<div class="login-wrapper">
+
+  <img src="img/suplex.jpg" alt="Fondo Login" class="bg-image">
+
+  <div class="overlay"></div>
+
+  <div class="login-card fade-in-up">
+
+    <div class="login-header">
+      <div class="icon-bg">
+        <i class="bi bi-person-lock"></i>
+      </div>
+      <h2>ACCESO <span class="highlight">ADMIN</span></h2>
+      <p>Gestión del Club de Lucha</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+
+      <div class="input-group">
+        <label>Email</label>
+        <div class="input-field">
+          <i class="bi bi-envelope"></i>
+          <input type="email" name="email" [(ngModel)]="credenciales.email" placeholder="admin@club.com">
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Contraseña</label>
+        <div class="input-field">
+          <i class="bi bi-key"></i>
+          <input type="password" name="password" [(ngModel)]="credenciales.password" placeholder="••••••••">
+        </div>
+      </div>
+
+      @if (errores.length > 0) {
+        <div class="alert-error-container">
+          <ul>
+            @for (error of errores; track $index) {
+              <li><i class="bi bi-exclamation-circle-fill"></i> {{ error }}</li>
+            }
+          </ul>
+        </div>
+      }
+
+      <button type="submit" [disabled]="cargando" class="btn-login">
+        @if (cargando) {
+          <span class="loader"></span> Comprobando...
+        } @else {
+          ENTRAR AL SISTEMA
+        }
+      </button>
+
+    </form>
+
+    <div class="login-footer">
+      <a routerLink="/home">← Volver a la web</a>
+    </div>
+
+  </div>
+</div>

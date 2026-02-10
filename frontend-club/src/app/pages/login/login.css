@@ -1,0 +1,111 @@
+/* --- CONTENEDOR PRINCIPAL --- */
+.login-wrapper {
+  position: relative; /* Necesario para posicionar lo de dentro */
+  width: 100%;
+  height: 100vh; /* Ocupa toda la pantalla */
+  display: flex;
+  justify-content: center; /* Centrado Horizontal */
+  align-items: center;     /* Centrado Vertical */
+  overflow: hidden;        /* Evita scroll si la imagen es muy grande */
+  background-color: #1e3c72; /* Color de seguridad si falla la foto */
+}
+
+/* --- 1. IMAGEN DE FONDO (IMG) --- */
+.bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Clave: recorta la imagen para llenar la pantalla sin deformar */
+  z-index: 1; /* Capa más baja */
+}
+
+/* --- 2. OVERLAY OSCURO --- */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Negro al 60% de opacidad */
+  z-index: 2; /* Encima de la imagen */
+  backdrop-filter: blur(3px); /* Opcional: difumina un poco la foto del fondo */
+}
+
+/* --- 3. TARJETA DEL LOGIN --- */
+.login-card {
+  position: relative;
+  z-index: 3; /* Encima de todo */
+
+  background: white;
+  width: 90%; /* En móvil ocupa casi todo */
+  max-width: 400px; /* En PC no pasa de 400px */
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5); /* Sombra potente para destacar del fondo */
+  text-align: center;
+}
+
+/* Animación de entrada suave hacia arriba */
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- ESTILOS DEL CONTENIDO (Igual que antes) --- */
+.icon-bg {
+  width: 70px; height: 70px;
+  background-color: #e3f2fd; color: #1e3c72;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem; margin: 0 auto 20px auto;
+}
+
+h2 {
+  font-family: 'Oswald', sans-serif;
+  color: #1e3c72; margin: 0; font-size: 2rem;
+}
+.highlight { color: #ff9100; }
+
+/* Inputs */
+.input-group { margin-bottom: 20px; text-align: left; }
+.input-group label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 5px; }
+
+.input-field { position: relative; }
+.input-field i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #aaa; }
+
+.input-field input {
+  width: 100%;
+  padding: 12px 15px 12px 45px;
+  border: 1px solid #ddd; border-radius: 8px;
+  font-size: 1rem; box-sizing: border-box;
+}
+.input-field input:focus { border-color: #ff9100; outline: none; }
+
+/* Errores */
+.alert-error-container {
+  background-color: #ffebee; border: 1px solid #ef9a9a;
+  border-radius: 8px; padding: 10px; margin-bottom: 20px; text-align: left;
+}
+.alert-error-container ul { list-style: none; padding: 0; margin: 0; }
+.alert-error-container li { color: #c62828; font-size: 0.9rem; margin-bottom: 4px; }
+
+/* Botón */
+.btn-login {
+  width: 100%; padding: 14px;
+  background-color: #1e3c72; color: white;
+  border: none; border-radius: 8px;
+  font-family: 'Oswald', sans-serif; font-size: 1.1rem;
+  cursor: pointer; transition: background 0.3s;
+}
+.btn-login:hover { background-color: #ff9100; }
+
+/* Footer */
+.login-footer { margin-top: 25px; border-top: 1px solid #eee; padding-top: 20px; }
+.login-footer a { color: #888; text-decoration: none; }
+.login-footer a:hover { color: #1e3c72; }

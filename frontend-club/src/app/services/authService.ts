@@ -72,8 +72,9 @@ export class AuthService {
   }
 
   //Comprobacion rapida de si el usuario está logueado preguntando por el token
-  get estaAutenticado(): boolean {
-    return !!this.token;
+  get estaAutenticado(): any {
+    console.log(this.token)
+    if (this.token) return true;
   }
 
 /* Saber de manera rapida el rol para poder crear html personalizado con @if y recuperar los datos de sesion del usuario */

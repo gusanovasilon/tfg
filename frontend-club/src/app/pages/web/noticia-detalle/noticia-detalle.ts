@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'; // Para leer la URL
-import { NoticiasService } from '../../services/noticiasService';
-import { Noticia } from '../../interfaces/noticiasInterface';
+import { NoticiasService } from '../../../services/noticiasService';
+import { Noticia } from '../../../interfaces/noticiasInterface';
 
 @Component({
   selector: 'app-noticia-detalle',

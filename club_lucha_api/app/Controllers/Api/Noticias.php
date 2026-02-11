@@ -31,7 +31,4 @@ class Noticias extends ResourceController
         return $this->respond($data);
     }
 
-    
-    
-    
 }

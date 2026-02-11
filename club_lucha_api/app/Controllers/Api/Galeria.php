@@ -33,16 +33,16 @@ class Galeria extends ResourceController
     private function respondWithCors($data, $statusCode = 200)
     {
         $response = $this->response->setStatusCode($statusCode)
-                                   ->setJSON($data);
+            ->setJSON($data);
 
         // Permitir que Angular (localhost:4200) acceda a los datos
         $response->setHeader('Access-Control-Allow-Origin', '*') // O pon 'http://localhost:4200' para más seguridad
-                 ->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With')
-                 ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-        
+            ->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With')
+            ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+
         return $response;
     }
-    
+
     // Si tu navegador hace una petición OPTIONS (preflight), responde esto:
     public function options()
     {

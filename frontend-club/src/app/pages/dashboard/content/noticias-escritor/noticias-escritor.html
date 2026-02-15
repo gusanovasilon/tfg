@@ -1,1 +1,142 @@
-<p>noticias-escritor works!</p>
+<div class="panel-header">
+  <div class="header-content">
+    <div>
+      <h2>GESTIÓN DE <span class="highlight">NOTICIAS</span></h2>
+      <p>Publica novedades y eventos del club</p>
+    </div>
+    <button class="btn-new" (click)="abrirModalCrear()">
+      <i class="bi bi-plus-lg"></i> Nueva Noticia
+    </button>
+  </div>
+</div>
+
+<div class="table-container">
+
+  @if (cargando) {
+    <div class="loading-spinner">
+       <p>Cargando noticias...</p>
+    </div>
+  } @else {
+
+    <table class="dashboard-table">
+      <thead>
+        <tr>
+          <th>Imagen</th>
+          <th>Título</th>
+          <th>Fecha</th>
+          <th>Autor</th>
+          <th class="text-end">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (noticia of noticiasPaginadas; track noticia.id) {
+          <tr>
+            <td>
+              <div class="img-wrapper">
+                @if (noticia.imagen_url) {
+                  <img [src]="urlImagenes + noticia.imagen_url" class="thumb-img" alt="Foto">
+                } @else {
+                  <div class="no-img-placeholder"><i class="bi bi-image"></i></div>
+                }
+              </div>
+            </td>
+            <td class="titulo-col">{{ noticia.titulo }}</td>
+            <td>{{ noticia.fecha_publicacion | date:'dd/MM/yyyy' }}</td>
+            <td>{{ noticia.autor_nombre }}</td> <td class="text-end">
+              <button (click)="abrirModalEditar(noticia)" class="btn-action btn-edit" title="Editar">
+                <i class="bi bi-pencil-fill"></i>
+              </button>
+              <button (click)="borrar(noticia.id)" class="btn-action btn-delete" title="Borrar">
+                <i class="bi bi-trash-fill"></i>
+              </button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="5" class="text-center py-5">No hay noticias publicadas.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    @if (noticiasFiltradas.length > itemsPorPagina) {
+      <div class="pagination-container">
+
+        <button class="page-btn prev"
+                [disabled]="paginaActual === 1"
+                (click)="cambiarPagina(paginaActual - 1)">
+          <i class="bi bi-chevron-left"></i> Anterior
+        </button>
+
+        <div class="page-numbers">
+          @for (pagina of paginasArray; track pagina) {
+            <button class="page-number"
+                    [class.active]="pagina === paginaActual"
+                    (click)="cambiarPagina(pagina)">
+              {{ pagina }}
+            </button>
+          }
+        </div>
+
+        <button class="page-btn next"
+                [disabled]="paginaActual === totalPaginas"
+                (click)="cambiarPagina(paginaActual + 1)">
+          Siguiente <i class="bi bi-chevron-right"></i>
+        </button>
+
+      </div>
+
+      <div class="pagination-info">
+        Mostrando página {{ paginaActual }} de {{ totalPaginas }} (Total: {{ noticiasFiltradas.length }} noticias)
+      </div>
+    }
+  }
+</div>
+
+@if (mostrarModal) {
+  <div class="modal-backdrop">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h3>{{ esEdicion ? 'Editar Noticia' : 'Nueva Noticia' }}</h3>
+        <button class="btn-close" (click)="cerrarModal()"><i class="bi bi-x-lg"></i></button>
+      </div>
+
+      <div class="modal-body">
+        <form (ngSubmit)="guardar()">
+
+          <div class="form-group">
+            <label>Título</label>
+            <input type="text" [(ngModel)]="titulo" name="titulo" class="form-control" required placeholder="Ej: Resultados del fin de semana...">
+          </div>
+
+          <div class="form-group">
+            <label>Contenido</label>
+            <textarea [(ngModel)]="contenido" name="contenido" class="form-control" rows="6" required placeholder="Escribe aquí el cuerpo de la noticia..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Imagen Destacada</label>
+            <input type="file" (change)="onFileSelected($event)" class="form-control" accept="image/*">
+
+            @if (previewUrl) {
+              <div class="img-preview-container">
+                <p>Vista previa:</p>
+                <img [src]="previewUrl" class="img-preview">
+              </div>
+            }
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn-cancel" (click)="cerrarModal()">Cancelar</button>
+            <button type="submit" class="btn-save">
+              {{ esEdicion ? 'Guardar Cambios' : 'Publicar Noticia' }}
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+}

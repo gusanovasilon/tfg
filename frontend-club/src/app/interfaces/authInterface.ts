@@ -7,12 +7,13 @@ export type RolUsuario = 'admin' | 'atleta' | 'escritor' | 'entrenador';
 
 /* Interfaz de usuario, id lo dejamos como no obligatorio ya que no siempre lo voy a necesitar */
 export interface Usuario {
-    id?: number;
+    id: number;
     nombre: string;
     apellidos:string;
     username:string;
     email: string;
     rol: RolUsuario;
+    password?:string;
 }
 
 /* datos de logueo */

@@ -1,0 +1,77 @@
+CRITICAL - 2026-02-13 22:09:45 --> CodeIgniter\HTTP\Exceptions\HTTPException: Failed to parse JSON string. Error: Syntax error
+[Method: POST, Route: api/fichadeportiva/3]
+in SYSTEMPATH/HTTP/IncomingRequest.php on line 534.
+ 1 SYSTEMPATH/HTTP/IncomingRequest.php(534): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidJSON('Syntax error')
+ 2 APPPATH/Controllers/Api/Usuarios.php(40): CodeIgniter\HTTP\IncomingRequest->getJSON(true)
+ 3 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\Usuarios->update('3')
+ 4 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Usuarios))
+ 5 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-13 22:12:45 --> Error: Class "App\Models\PerfilAtletaModel" not found
+[Method: GET, Route: api/fichadeportiva/3]
+in APPPATH/Controllers/Api/FichaDeportiva.php on line 30.
+ 1 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\FichaDeportiva->show('3')
+ 2 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\FichaDeportiva))
+ 3 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-13 22:12:45 --> Error: Class "App\Models\PerfilAtletaModel" not found
+[Method: GET, Route: api/fichadeportiva/3]
+in APPPATH/Controllers/Api/FichaDeportiva.php on line 30.
+ 1 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\FichaDeportiva->show('3')
+ 2 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\FichaDeportiva))
+ 3 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-13 22:13:18 --> Error: Class "App\Models\PerfilAtletaModel" not found
+[Method: POST, Route: api/fichadeportiva/3]
+in APPPATH/Controllers/Api/FichaDeportiva.php on line 111.
+ 1 APPPATH/Controllers/Api/FichaDeportiva.php(102): App\Controllers\Api\FichaDeportiva->gestionarAtleta('3', null, 'uploads/atletas')
+ 2 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\FichaDeportiva->update('3')
+ 3 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\FichaDeportiva))
+ 4 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-13 22:14:01 --> Error: Class "App\Models\PerfilAtletaModel" not found
+[Method: GET, Route: api/fichadeportiva/3]
+in APPPATH/Controllers/Api/FichaDeportiva.php on line 30.
+ 1 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\FichaDeportiva->show('3')
+ 2 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\FichaDeportiva))
+ 3 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-13 22:15:02 --> Error: Class "App\Models\PerfilAtletaModel" not found
+[Method: GET, Route: api/fichadeportiva/3]
+in APPPATH/Controllers/Api/FichaDeportiva.php on line 30.
+ 1 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\FichaDeportiva->show('3')
+ 2 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\FichaDeportiva))
+ 3 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-13 22:15:21 --> Error: Class "App\Models\PerfilAtletaModel" not found
+[Method: POST, Route: api/fichadeportiva/3]
+in APPPATH/Controllers/Api/FichaDeportiva.php on line 111.
+ 1 APPPATH/Controllers/Api/FichaDeportiva.php(102): App\Controllers\Api\FichaDeportiva->gestionarAtleta('3', null, 'uploads/atletas')
+ 2 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\FichaDeportiva->update('3')
+ 3 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\FichaDeportiva))
+ 4 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-13 22:15:21 --> Error: Class "App\Models\PerfilAtletaModel" not found
+[Method: POST, Route: api/fichadeportiva/3]
+in APPPATH/Controllers/Api/FichaDeportiva.php on line 111.
+ 1 APPPATH/Controllers/Api/FichaDeportiva.php(102): App\Controllers\Api\FichaDeportiva->gestionarAtleta('3', null, 'uploads/atletas')
+ 2 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\FichaDeportiva->update('3')
+ 3 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\FichaDeportiva))
+ 4 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

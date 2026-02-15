@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { NoticiasComponent } from './components/noticias/noticias';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NavbarComponent } from './components/navbar/navbar';
 import { HeroComponent } from './components/hero/hero';
@@ -25,8 +25,10 @@ import { Perfil } from './pages/dashboard/common/perfil/perfil';
 import { Usuarios } from './pages/dashboard/admin/usuarios/usuarios';
 import { MensajesContacto } from './pages/dashboard/admin/mensajes-contacto/mensajes-contacto';
 import { MisClases } from './pages/dashboard/training/mis-clases/mis-clases';
-import { GestionEntrenamientos } from './pages/dashboard/admin/gestion-entrenamientos/gestion-entrenamientos';
+import { GestionEntrenamientos } from './pages/dashboard/training/gestion-entrenamientos/gestion-entrenamientos';
 import { NoticiasEscritor } from './pages/dashboard/content/noticias-escritor/noticias-escritor';
+import { Mensajes } from './pages/dashboard/common/mensajes/mensajes';
+
 
 
 @NgModule({
@@ -52,13 +54,17 @@ import { NoticiasEscritor } from './pages/dashboard/content/noticias-escritor/no
     MensajesContacto,
     MisClases,
     GestionEntrenamientos,
-    NoticiasEscritor
+    NoticiasEscritor,
+    Mensajes
+
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners()

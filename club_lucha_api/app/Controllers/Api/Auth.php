@@ -34,11 +34,13 @@ class Auth extends ResourceController
 
         return $this->respond([
             'status' => 'Login correcto',
+            'id' => $usuario ['id'],
             'token'  => $nuevoToken,     
             'rol'    => $usuario['rol'], 
             'nombre' => $usuario['nombre'], 
             'username' => $usuario['username'], 
-            'apellidos' => $usuario['apellidos'], 
+            'apellidos' => $usuario['apellidos'],
+            'email' => $usuario['email'],
         ]);
     }
 

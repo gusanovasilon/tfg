@@ -8,8 +8,13 @@ export const escritorGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
+  console.log('--- ESCRITOR GUARD ---');
+  console.log('Usuario actual:', authService.usuario);
+  console.log('Es Escritor?', authService.esEscritor);
+  console.log('Es Admin?', authService.esAdmin);
+
   // Comprobacion de autenticacion
-  if (authService.esEscritor) {
+  if (authService.esEscritor || authService.esAdmin) {
     return true;
   } else {
     router.navigate(['/dashboard/perfil']);

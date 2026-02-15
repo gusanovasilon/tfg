@@ -15,11 +15,15 @@ import { Perfil } from './pages/dashboard/common/perfil/perfil';
 import { Usuarios } from './pages/dashboard/admin/usuarios/usuarios';
 import { MensajesContacto } from './pages/dashboard/admin/mensajes-contacto/mensajes-contacto';
 import { MisClases } from './pages/dashboard/training/mis-clases/mis-clases';
-import { GestionEntrenamientos } from './pages/dashboard/admin/gestion-entrenamientos/gestion-entrenamientos';
+import { GestionEntrenamientos } from './pages/dashboard/training/gestion-entrenamientos/gestion-entrenamientos';
 import { NoticiasEscritor } from './pages/dashboard/content/noticias-escritor/noticias-escritor';
 
+import { Mensajes } from './pages/dashboard/common/mensajes/mensajes';
+import { mensajesGuard } from './guards/mensajesGuard';
+
 const routes: Routes = [
-  { path: '',
+  {
+    path: '',
     component: Home,
     pathMatch: 'full'
   },
@@ -41,38 +45,43 @@ const routes: Routes = [
     component: NoticiaDetalle
   },
   {
-  path: 'dashboard',
-  component: Dashboard,
-  canActivate: [authGuard],
-  children: [
-    { path: 'perfil', component: Perfil },
-    {
-      path: 'usuarios',
-      component: Usuarios,
-      canActivate: [adminGuard]
-    },
-    {
-      path: 'mensajes-contacto',
-      component: MensajesContacto,
-      canActivate: [adminGuard]
-    },
-    {
-      path: 'mis-clases',
-      component: MisClases,
-      canActivate: [atletaGuard]
-    },
-    {
-      path: 'gestion-entrenamientos',
-      component: GestionEntrenamientos,
-      canActivate: [staffGuard]
-    },
-    {
-      path: 'noticias',
-      component: NoticiasEscritor,
-      canActivate: [escritorGuard]
-    }
-  ]
-},
+    path: 'dashboard',
+    component: Dashboard,
+    canActivate: [authGuard],
+    children: [
+      { path: 'perfil', component: Perfil },
+      {
+        path: 'usuarios',
+        component: Usuarios,
+        canActivate: [adminGuard]
+      },
+      {
+        path: 'mensajes',
+        component: Mensajes,
+        canActivate: [mensajesGuard]
+      },
+      {
+        path: 'mensajes-contacto',
+        component: MensajesContacto,
+        canActivate: [adminGuard]
+      },
+      {
+        path: 'mis-clases',
+        component: MisClases,
+        canActivate: [atletaGuard]
+      },
+      {
+        path: 'gestion-entrenamientos',
+        component: GestionEntrenamientos,
+        canActivate: [staffGuard]
+      },
+      {
+        path: 'noticias-escritor',
+        component: NoticiasEscritor,
+        canActivate: [escritorGuard]
+      }
+    ]
+  },
   {
     path: '**',
     redirectTo: ''

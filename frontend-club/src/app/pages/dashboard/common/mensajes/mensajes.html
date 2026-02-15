@@ -1,0 +1,154 @@
+<div class="panel-header">
+  <div class="header-content">
+    <div>
+      <h2>CENTRO DE <span class="highlight">MENSAJES</span></h2>
+      <p>
+        @if(esAdmin) { Supervisión de conversaciones }
+        @else { Tu buzón de entrada }
+      </p>
+    </div>
+
+    <button class="btn-new" (click)="abrirModalNuevo()">
+      <i class="bi bi-send-fill"></i> Redactar Mensaje
+    </button>
+  </div>
+</div>
+
+<div class="container-mensajes">
+
+  @if (cargando) {
+    <div class="loading">Cargando comunicaciones...</div>
+  } @else {
+
+    @if (vistaActual === 'ADMIN_LISTA') {
+      <div class="table-responsive">
+        <table class="dashboard-table">
+          <thead>
+            <tr>
+              <th>Interlocutores</th>
+              <th>Total Msj</th>
+              <th>Último Activo</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (chat of listaConversaciones; track chat.usuario_1_id) {
+              <tr>
+                <td>
+                  <div class="chat-participants">
+                    <span class="badge-role">{{ chat.rol_u1 }}</span> {{ chat.nombre_u1 }}
+                    <i class="bi bi-arrow-left-right mx-2"></i>
+                    <span class="badge-role">{{ chat.rol_u2 }}</span> {{ chat.nombre_u2 }}
+                  </div>
+                </td>
+                <td>{{ chat.total_mensajes }}</td>
+                <td>{{ chat.ultimo_mensaje | date:'short' }}</td>
+                <td>
+                  <button class="btn-action btn-view" (click)="verChatCompleto(chat.usuario_1_id, chat.usuario_2_id)" title="Leer Chat">
+                    <i class="bi bi-eye-fill"></i>
+                  </button>
+                  <button class="btn-action btn-delete" (click)="borrarConversacion(chat.usuario_1_id, chat.usuario_2_id)" title="Borrar Todo">
+                    <i class="bi bi-trash-fill"></i>
+                  </button>
+                </td>
+              </tr>
+            } @empty {
+              <tr><td colspan="4" class="text-center">No hay conversaciones activas.</td></tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+
+    @if (vistaActual === 'INBOX') {
+      <div class="inbox-container">
+        @for (msg of misMensajes; track msg.id) {
+          <div class="mensaje-card" [class.anuncio]="msg.tipo === 'anuncio'">
+            <div class="msg-icon">
+              @if(msg.tipo === 'anuncio') { <i class="bi bi-megaphone-fill"></i> }
+              @else { <i class="bi bi-envelope-fill"></i> }
+            </div>
+            <div class="msg-content">
+              <div class="msg-header">
+                <span class="remitente">
+                  {{ msg.nombre_remitente }} {{ msg.apellidos_remitente }}
+                  @if(msg.rol_remitente === 'admin') { <span class="badge-admin">Admin</span> }
+                </span>
+                <span class="fecha">{{ msg.fecha_envio | date:'dd/MM HH:mm' }}</span>
+              </div>
+              <h4 class="asunto">{{ msg.asunto }}</h4>
+              <p class="cuerpo">{{ msg.cuerpo }}</p>
+            </div>
+          </div>
+        } @empty {
+          <div class="empty-state">No tienes mensajes recibidos.</div>
+        }
+      </div>
+    }
+
+    @if (vistaActual === 'CHAT_DETALLE') {
+      <div class="chat-detalle-container">
+        <button class="btn-back" (click)="volverALista()">
+          <i class="bi bi-arrow-left"></i> Volver a la lista
+        </button>
+
+        <div class="chat-history">
+          @for (msg of chatDetalle; track msg.id) {
+            <div class="chat-bubble" [class.left]="true"> <div class="bubble-info">
+                <strong>{{ msg.nombre_remitente }}</strong> ({{ msg.rol_remitente }})
+                <span class="time">{{ msg.fecha_envio | date:'shortTime' }}</span>
+              </div>
+              <div class="bubble-text">{{ msg.cuerpo }}</div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+  }
+</div>
+
+@if (mostrarModalNuevo) {
+  <div class="modal-backdrop">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Nuevo Mensaje</h3>
+        <button class="btn-close" (click)="cerrarModal()"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="enviar()">
+
+          <div class="form-group">
+            <label>Destinatario</label>
+            <select [(ngModel)]="nuevoMensaje.destinatario_id" name="destinatario" class="form-control">
+              <option [value]="0" disabled selected>Selecciona un usuario...</option>
+
+              @if(esAdmin) { <option [value]="0" class="opt-broadcast">📢 ENVIAR A TODOS (Anuncio)</option> }
+
+              @for (user of listaUsuarios; track user.id) {
+                <option [value]="user.id">
+                  {{ user.nombre }} {{ user.apellidos }} ({{ user.rol }})
+                </option>
+              }
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Asunto</label>
+            <input type="text" [(ngModel)]="nuevoMensaje.asunto" name="asunto" class="form-control" required placeholder="Ej: Cambio de horario...">
+          </div>
+
+          <div class="form-group">
+            <label>Mensaje</label>
+            <textarea [(ngModel)]="nuevoMensaje.cuerpo" name="cuerpo" class="form-control" rows="5" required></textarea>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn-cancel" (click)="cerrarModal()">Cancelar</button>
+            <button type="submit" class="btn-save">Enviar Mensaje</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+}

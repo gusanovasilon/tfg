@@ -10,10 +10,37 @@ class MensajeContacto extends ResourceController
 {
 
 
-    protected $modelName = 'App\Models\MensajeModel';
+    
     protected $format    = 'json';
 
     // POST /api/mensajes
+
+    public function index()
+    {
+        $model = new MensajeContactoModel();
+        // Los ordenamos por fecha descendente (lo más nuevo primero)
+        $mensajes = $model->orderBy('fecha', 'DESC')->findAll();
+        
+        return $this->respond($mensajes);
+    }
+
+    public function delete($id = null)
+    {
+        $model = new MensajeContactoModel();
+        
+        // Comprobamos si existe antes de borrar
+        $data = $model->find($id);
+        
+        if ($data) {
+            $model->delete($id);
+            return $this->respondDeleted(['status' => 'success', 'message' => 'Mensaje eliminado']);
+        } else {
+            return $this->failNotFound('No se encontró el mensaje con ID: ' . $id);
+        }
+    }
+
+
+
     public function create()
     {
         $model = new MensajeContactoModel();

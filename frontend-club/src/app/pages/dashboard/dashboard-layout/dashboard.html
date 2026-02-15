@@ -24,14 +24,14 @@
         <a routerLink="mensajes-contacto" routerLinkActive="active" class="menu-item">
           <i class="bi bi-envelope-paper-fill"></i> Buzón Web
         </a>
-        <a routerLink="mensajes-app" routerLinkActive="active" class="menu-item">
+        <a routerLink="mensajes" routerLinkActive="active" class="menu-item">
           <i class="bi bi-chat-left-dots-fill"></i> Monitorizar Chats
         </a>
       }
 
       @if (auth.esAdmin || auth.esEscritor) {
         <p class="menu-label">REDACCIÓN</p>
-        <a routerLink="noticias" routerLinkActive="active" class="menu-item">
+        <a routerLink="noticias-escritor" routerLinkActive="active" class="menu-item">
           <i class="bi bi-newspaper"></i> Noticias
         </a>
       }
@@ -52,7 +52,7 @@
 
       @if (auth.esEntrenador || auth.esAtleta) {
         <p class="menu-label">COMUNICACIÓN</p>
-        <a routerLink="chat" routerLinkActive="active" class="menu-item">
+        <a routerLink="mensajes" routerLinkActive="active" class="menu-item">
           <i class="bi bi-chat-text"></i> Chat Interno
         </a>
       }

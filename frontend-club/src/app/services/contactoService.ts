@@ -13,7 +13,17 @@ export class ContactoService {
 
   constructor(private http: HttpClient) { }
 
+  //enviar y guardar los mensajes
   enviarMensaje(mensaje: MensajeContacto): Observable<any> {
     return this.http.post(this.apiUrl + "/contacto", mensaje);
+  }
+/* obtener todos los mensajes */
+  getMensajes(): Observable<MensajeContacto[]> {
+    return this.http.get<MensajeContacto[]>(this.apiUrl + "/mensajes");
+  }
+
+  /* borrar mensajes */
+  borrarMensaje(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/mensajes/${id}`);
   }
 }

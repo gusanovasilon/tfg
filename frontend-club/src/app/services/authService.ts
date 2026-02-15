@@ -45,8 +45,10 @@ export class AuthService {
   Tambien creamos un objeto usuario con todos los datos recibidos menos el token */
 
   /* FUNCION NECESARIA PARA QUE CUANDO RECARGUEMOS LA PAGINA POR ALGUN CASUAL NO PERDER LOS DATOS DE LA SESION  */
-  private guardarSesion(data: LoginResponse): void {
+  public guardarSesion(data: LoginResponse): void {
+    if (data.token){
     localStorage.setItem(this.TOKEN_KEY, data.token);
+    }
     const usuario: Usuario = {
       id: data.id,
       username: data.username,
@@ -73,7 +75,7 @@ export class AuthService {
 
   //Comprobacion rapida de si el usuario está logueado preguntando por el token
   get estaAutenticado(): any {
-    console.log(this.token)
+    
     if (this.token) return true;
   }
 

@@ -1,1 +1,52 @@
-<p>mensajes-contacto works!</p>
+<div class="panel-header">
+  <h2>BUZÓN DE <span class="highlight">CONTACTO</span></h2>
+  <p>Mensajes recibidos desde el formulario web</p>
+</div>
+
+<div class="table-container">
+
+  @if (cargando) {
+  <p class="loading">Cargando mensajes...</p>
+  } @else if (mensajes.length == 0) {
+  <div class="empty-state">
+    <i class="bi bi-inbox"></i>
+    <p>No hay mensajes nuevos.</p>
+  </div>
+  } @else {
+
+  <table class="dashboard-table">
+    <thead>
+      <tr>
+
+        <th>Fecha</th>
+        <th>Nombre</th>
+        <th>Asunto</th>
+        <th>Mensaje</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (msg of mensajes; track msg.id) {
+      <tr>
+        <td class="date-col">{{ msg.fecha | date:'dd/MM/yyyy HH:mm' }}</td>
+        <td class="name-col">
+          <strong>{{ msg.nombre }}</strong><br>
+          <small>{{ msg.email }}</small>
+        </td>
+        <td><span class="badge-asunto">{{ msg.asunto }}</span></td>
+        <td class="msg-col">{{ msg.mensaje }}</td>
+        <td>
+          <a href="mailto:{{ msg.email }}?subject=Re: {{ msg.asunto }}" class="btn-action btn-reply" title="Responder">
+            <i class="bi bi-reply-fill"></i>
+          </a>
+          <button (click)="borrar(msg.id)" class="btn-action btn-delete" title="Borrar">
+            <i class="bi bi-trash-fill"></i>
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+
+  }
+</div>

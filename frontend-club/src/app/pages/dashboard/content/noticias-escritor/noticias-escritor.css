@@ -1,0 +1,141 @@
+/* Cabecera con botón a la derecha */
+.header-content {
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+.btn-new {
+  background-color: #1e3c72; color: white; border: none; padding: 10px 20px;
+  border-radius: 6px; cursor: pointer; font-weight: bold; display: flex; align-items: center; gap: 8px;
+}
+.btn-new:hover { background-color: #2a5298; }
+
+/* Tabla */
+.table-container { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+.dashboard-table { width: 100%; border-collapse: collapse; }
+.dashboard-table th { text-align: left; padding: 15px; color: #64748b; border-bottom: 2px solid #e2e8f0; }
+.dashboard-table td { padding: 15px; border-bottom: 1px solid #e2e8f0; vertical-align: middle; }
+
+/* Imágenes en tabla */
+.thumb-img {
+  width: 50px; height: 50px; object-fit: cover; border-radius: 6px; border: 1px solid #e2e8f0;
+}
+.no-img { font-size: 0.8rem; color: #94a3b8; font-style: italic; }
+
+.titulo-col { font-weight: 600; color: #334155; }
+
+/* Botones Acción (Reutilizados) */
+.btn-action { border: none; width: 32px; height: 32px; border-radius: 6px; cursor: pointer; margin-left: 5px; transition: 0.2s; }
+.btn-edit { background-color: #e0f2fe; color: #0284c7; }
+.btn-delete { background-color: #fee2e2; color: #ef4444; }
+
+/* --- MODAL --- */
+.modal-backdrop {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); z-index: 1000;
+  display: flex; justify-content: center; align-items: center;
+}
+.modal-content {
+  background: white; width: 90%; max-width: 600px; border-radius: 10px; padding: 25px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.btn-close { background: none; border: none; font-size: 1.2rem; cursor: pointer; }
+
+/* Formulario */
+.form-group { margin-bottom: 15px; }
+.form-control { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; }
+textarea.form-control { resize: vertical; font-family: inherit; }
+
+/* Previsualización de imagen */
+.img-preview-container { margin-top: 10px; text-align: center; background: #f8fafc; padding: 10px; border-radius: 6px; }
+.img-preview { max-width: 100%; max-height: 200px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+
+.modal-footer { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+.btn-save { background-color: #1e3c72; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+.btn-cancel { background-color: #e2e8f0; color: #475569; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; }
+
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+  gap: 15px; /* Espacio entre los botones Anterior/Números/Siguiente */
+}
+
+/* Botones Anterior y Siguiente */
+.page-btn {
+  background-color: white;
+  border: 1px solid #e2e8f0;
+  color: #1e3c72; /* Azul corporativo */
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espacio entre el icono y el texto */
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+}
+
+.page-btn:hover:not(:disabled) {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+}
+
+.page-btn:disabled {
+  background-color: #f8fafc;
+  color: #cbd5e1;
+  cursor: not-allowed;
+  box-shadow: none;
+  border-color: #f1f5f9;
+}
+
+/* Contenedor de los numeritos */
+.page-numbers {
+  display: flex;
+  gap: 6px;
+}
+
+/* Cada botón de número (cuadrado redondeado) */
+.page-number {
+  width: 38px;
+  height: 38px;
+  border: 1px solid #e2e8f0;
+  background-color: white;
+  color: #64748b;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.page-number:hover {
+  background-color: #f1f5f9;
+  color: #1e3c72;
+  border-color: #cbd5e1;
+}
+
+/* Estilo para la página ACTIVA */
+.page-number.active {
+  background-color: #1e3c72; /* Fondo Azul */
+  color: white;              /* Texto Blanco */
+  border-color: #1e3c72;
+  box-shadow: 0 4px 6px rgba(30, 60, 114, 0.2); /* Sombrita suave */
+  transform: scale(1.05);    /* Un pelín más grande */
+}
+
+/* Texto de información abajo */
+.pagination-info {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.85rem;
+  color: #94a3b8; /* Gris suave para no distraer */
+  font-weight: 500;
+}

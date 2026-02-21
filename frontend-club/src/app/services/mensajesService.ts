@@ -1,56 +1,74 @@
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Mensaje, ConversacionAdmin } from '../interfaces/mensajesInterface';
+import { Mensaje, Conversacion } from '../interfaces/mensajesInterface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MensajesService {
 
-  // URL base: http://localhost:8080/api/mensajes
+  // URL base: http://localhost:8888/.../api/mensajes
   private apiUrl = `${environment.apiUrl}/mensajes`;
 
   constructor(private http: HttpClient) { }
 
   // ==========================================
-  // 1. FUNCIONES PARA EL USUARIO (Atleta/Entrenador)
+  // 1. OBTENER LISTA DE CHATS (Bandeja de Entrada)
   // ==========================================
-getMisMensajes(userId: number): Observable<Mensaje[]> {
-  // Ahora la URL termina en /3
-  return this.http.get<Mensaje[]>(`${this.apiUrl}/${userId}`);
-}
+  // Llama a: GET api/mensajes/5
+  getMisConversaciones(userId: number): Observable<Conversacion[]> {
+    return this.http.get<Conversacion[]>(`${this.apiUrl}/${userId}`);
+  }
 
-enviarMensaje(mensaje: Mensaje): Observable<any> {
-  return this.http.post<any>(this.apiUrl, mensaje);
-}
+  // ==========================================
+  // 2. OBTENER MENSAJES DE UN CHAT CONCRETO
+  // ==========================================
+  // Llama a: GET api/mensajes/chat/45
+  getMensajesDeConversacion(chatId: number): Observable<Mensaje[]> {
+    return this.http.get<Mensaje[]>(`${this.apiUrl}/chat/${chatId}`);
+  }
 
-marcarComoLeido(idMensaje: number): Observable<any> {
-  return this.http.put<any>(`${this.apiUrl}/leer/${idMensaje}`, {});
-}
+  // ==========================================
+  // 3. BORRAR CONVERSACIÓN ENTERA
+  // ==========================================
+  // Llama a: DELETE api/mensajes/chat/45
+  borrarConversacion(chatId: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/chat/${chatId}`);
+  }
 
-borrarMensaje(idMensaje: number): Observable<any> {
-  return this.http.delete<any>(`${this.apiUrl}/${idMensaje}`);
-}
+  // ==========================================
+  // 4. ENVIAR MENSAJE (Crea el chat si no existe)
+  // ==========================================
+  // Llama a: POST api/mensajes
+  // El backend se encarga de calcular el conversacion_id si falta.
+  enviarMensaje(mensaje: Mensaje): Observable<any> {
 
-getConversacionesAdmin(): Observable<ConversacionAdmin[]> {
-  const params = new HttpParams().set('admin', 'true');
-  return this.http.get<ConversacionAdmin[]>(this.apiUrl, { params });
-}
+    console.log('Servicio recibiendo:', mensaje); // <--- ¿Qué llega aquí?
+    console.log('¿Tiene ID?', mensaje.conversacion_id);
 
-getChatCompleto(u1: number, u2: number): Observable<Mensaje[]> {
-  let params = new HttpParams()
-    .set('u1', u1.toString())
-    .set('u2', u2.toString());
-  return this.http.get<Mensaje[]>(`${this.apiUrl}/conversacion`, { params });
-}
+    // Verificamos si existe Y si es mayor que 0
+    if (mensaje.conversacion_id && mensaje.conversacion_id > 0) {
+       console.log('--> Enviando por ruta CON ID (Responder)');
+       return this.http.post<any>(`${this.apiUrl}/${mensaje.conversacion_id}`, mensaje);
+    }
+    else {
+       console.log('--> Enviando por ruta SIN ID (Nuevo Chat)');
+       return this.http.post<any>(this.apiUrl, mensaje);
+    }
+  }
 
-borrarConversacionEntera(u1: number, u2: number): Observable<any> {
-  let params = new HttpParams()
-    .set('u1', u1.toString())
-    .set('u2', u2.toString());
-  return this.http.delete<any>(`${this.apiUrl}/conversacion`, { params });
-}
+  eliminarSalaCompleta(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/sala/${id}`);
+  }
+
+  enviarAvisoGlobal(remitente_id: number, cuerpo: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/aviso-global`, {
+      remitente_id: remitente_id,
+      cuerpo: cuerpo
+    });
+  }
+
 
 }

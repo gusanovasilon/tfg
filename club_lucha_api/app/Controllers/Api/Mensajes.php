@@ -5,102 +5,196 @@ namespace App\Controllers\Api;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 use App\Models\MensajeModel;
+use App\Models\ConversacionModel; 
+use App\Models\UsuarioModel;
 
 class Mensajes extends ResourceController
 {
     use ResponseTrait;
 
-    // GET: api/mensajes?userId=5 (Para usuarios normales)
-    // GET: api/mensajes?admin=true (Para el administrador)
- public function index($userId = null) 
-{
-    $model = new MensajeModel();
-    $isAdmin = $this->request->getGet('admin');
-
-    if ($isAdmin === 'true') {
-        return $this->respond($model->getListaConversacionesAdmin());
-    }
-
-    if ($userId) {
-        return $this->respond($model->getMisMensajes($userId));
-    }
-    
-    return $this->fail('Falta el ID del usuario');
-}
-
-
-    // POST: api/mensajes
-    public function create()
+    // BANDEJA DE ENTRADA
+    public function index($userId = null)
     {
-        $model = new MensajeModel();
-        $data = $this->request->getJSON(true);
+        if (!$userId) return $this->fail('Falta el ID del usuario en la URL');
 
-        // Validaciones básicas
-        if (empty($data['remitente_id']) || empty($data['cuerpo'])) {
-            return $this->failValidationErrors('Faltan datos');
-        }
+        $usuarioModel = new UsuarioModel();
+        $usuario = $usuarioModel->find($userId);
 
-        // --- CAMBIO AQUÍ ---
-        // Si viene destinatario_id = 0, lo convertimos a NULL y tipo 'anuncio'
-        if (isset($data['destinatario_id']) && $data['destinatario_id'] == 0) {
-            $data['tipo'] = 'anuncio';
-            $data['destinatario_id'] = null; // <--- PONER NULL, NO 0
+        if (!$usuario) return $this->failNotFound('Usuario no encontrado');
+
+        $mensajeModel = new MensajeModel();
+        $chatModel = new ConversacionModel();
+
+        // AQUÍ ESTÁ LA MAGIA:
+        if ($usuario['rol'] === 'admin') {
+            // El admin usa el modelo de Mensajes para tener el recuento y los datos espía
+            return $this->respond($mensajeModel->getListaConversacionesAdmin());
         } else {
-            $data['tipo'] = 'privado';
+            // El usuario normal usa el modelo de Conversaciones
+            return $this->respond($chatModel->getMisConversaciones($userId));
+        }
+    }
+
+    // ENVIAR MENSAJE
+    public function create($idConversacionUrl = null)
+    {
+        $mensajeModel = new MensajeModel();
+        $chatModel = new ConversacionModel();
+        
+        $data = $this->request->getJSON(true);
+        $remitenteId = $data['remitente_id'];
+        $finalConversacionId = null;
+
+        if ($idConversacionUrl !== null) {
+            $finalConversacionId = $idConversacionUrl;
+            
+            $chat = $chatModel->find($finalConversacionId);
+            if ($chat) {
+                if ($chat['usuario_1_id'] == $remitenteId) {
+                    $data['destinatario_id'] = $chat['usuario_2_id'];
+                } elseif ($chat['usuario_2_id'] == $remitenteId) {
+                    $data['destinatario_id'] = $chat['usuario_1_id'];
+                }
+            }
+        } else {
             if (empty($data['destinatario_id'])) {
                 return $this->failValidationErrors('Falta el destinatario');
             }
-        }
-        // -------------------
 
-        $data['leido'] = 0;
+            $chatIdExistente = $chatModel->obtenerIdConversacion($remitenteId, $data['destinatario_id']);
 
-        try {
-            if ($model->insert($data)) {
-                return $this->respondCreated(['status' => 'success', 'message' => 'Enviado']);
+            if ($chatIdExistente) {
+                $finalConversacionId = $chatIdExistente;
             } else {
-                return $this->failServerError('Error al guardar');
+                $finalConversacionId = $chatModel->crearConversacion($remitenteId, $data['destinatario_id']);
             }
-        } catch (\Exception $e) {
-            // Esto te ayudará a ver errores futuros en el response
-            return $this->failServerError($e->getMessage());
+        }
+
+        if (empty($data['cuerpo']) || trim($data['cuerpo']) === '') {
+            return $this->respondCreated([
+                'status' => 'success',
+                'conversacion_id' => $finalConversacionId,
+                'mensaje' => 'Chat abierto sin mensaje inicial'
+            ]);
+        }
+
+        $data['conversacion_id'] = $finalConversacionId;
+        $data['fecha_envio']     = date('Y-m-d H:i:s');
+        $data['tipo']            = 'privado';
+
+        if ($mensajeModel->insert($data)) {
+            $chatModel->update($finalConversacionId, ['ultimo_mensaje_at' => date('Y-m-d H:i:s')]);
+            return $this->respondCreated([
+                'status' => 'success',
+                'conversacion_id' => $finalConversacionId
+            ]);
+        } else {
+            return $this->failServerError('Error al guardar mensaje');
         }
     }
-    // DELETE: api/mensajes/conversacion?u1=5&u2=8
-    // El Admin borra el chat entre el usuario 5 y el 8
-    public function borrarConversacion()
-    {
-        $u1 = $this->request->getVar('u1');
-        $u2 = $this->request->getVar('u2');
 
-        if (!$u1 || !$u2) return $this->fail('Faltan los IDs de los usuarios');
+    // VER MENSAJES DE UN CHAT
+    public function verConversacion($chatId = null)
+    {
+        if (!$chatId) return $this->fail('Falta ID conversación');
 
         $model = new MensajeModel();
-
-        // Llamamos a la función potente del modelo
-        if ($model->borrarConversacionEntera($u1, $u2)) {
-            return $this->respondDeleted(['status' => 'success', 'message' => 'Conversación eliminada']);
-        }
-
-        return $this->fail('No se pudo borrar');
-    }
-
-    // GET: api/mensajes/conversacion?u1=5&u2=8
-    // Devuelve todos los mensajes entre el usuario 5 y el 8
-    public function verConversacion()
-    {
-        $u1 = $this->request->getVar('u1');
-        $u2 = $this->request->getVar('u2');
-
-        if (!$u1 || !$u2) {
-            return $this->fail('Se necesitan los IDs de ambos usuarios (u1 y u2)');
-        }
-
-        $model = new MensajeModel();
-
-        // Obtenemos el chat completo
-        $mensajes = $model->getChatCompleto($u1, $u2);
+        $mensajes = $model->select('mensajes.*, u.nombre as nombre_remitente')
+                          ->join('usuarios u', 'u.id = mensajes.remitente_id', 'left')
+                          ->where('conversacion_id', $chatId)
+                          ->orderBy('fecha_envio', 'ASC')
+                          ->findAll();
 
         return $this->respond($mensajes);
+    }
+
+    // VACIAR CONVERSACIÓN (Borra mensajes)
+    public function borrarConversacion($chatId = null)
+    {
+        if (!$chatId) return $this->fail('Falta ID');
+        
+        $mensajeModel = new MensajeModel();
+        
+        if ($mensajeModel->where('conversacion_id', $chatId)->delete()) {
+            return $this->respondDeleted([
+                'status' => 'success', 
+                'message' => 'Mensajes eliminados correctamente. La sala de chat sigue existiendo.'
+            ]);
+        }
+        
+        return $this->fail('Error al vaciar los mensajes de la conversación');
+    }
+
+    // DESTRUIR SALA (Borra todo)
+    public function eliminarSala($chatId = null)
+    {
+        if (!$chatId) return $this->fail('Falta ID');
+        
+        $mensajeModel = new MensajeModel();
+        $chatModel = new ConversacionModel();
+        
+        $mensajeModel->where('conversacion_id', $chatId)->delete();
+        
+        if ($chatModel->delete($chatId)) {
+            return $this->respondDeleted([
+                'status' => 'success', 
+                'message' => 'Sala destruida por completo.'
+            ]);
+        }
+        
+        return $this->fail('Error al destruir la sala');
+    }
+
+    // 6. AVISO GLOBAL (Difusión)
+    public function avisoGlobal()
+    {
+        $data = $this->request->getJSON(true);
+        $remitenteId = $data['remitente_id'];
+        $cuerpo = $data['cuerpo'];
+
+        if (empty($cuerpo)) return $this->failValidationErrors('El mensaje no puede estar vacío');
+
+        $usuarioModel = new UsuarioModel();
+        $chatModel = new ConversacionModel();
+        $mensajeModel = new MensajeModel();
+
+        // 1. Obtener todos los usuarios activos (menos el admin que lo envía)
+        // Como usamos Soft Deletes, findAll() ignora a los borrados automáticamente
+        $usuarios = $usuarioModel->where('id !=', $remitenteId)->findAll();
+
+        $mensajesEnviados = 0;
+
+        // 2. Bucle de difusión masiva
+        foreach ($usuarios as $user) {
+            $destinatarioId = $user['id'];
+
+            // Buscamos si ya hay carpeta de chat, si no, la creamos
+            $chatId = $chatModel->obtenerIdConversacion($remitenteId, $destinatarioId);
+            if (!$chatId) {
+                $chatId = $chatModel->crearConversacion($remitenteId, $destinatarioId);
+            }
+
+            // Insertamos el mensaje
+            $msgData = [
+                'conversacion_id' => $chatId,
+                'remitente_id'    => $remitenteId,
+                'destinatario_id' => $destinatarioId,
+                'cuerpo'          => $cuerpo,
+                'tipo'            => 'anuncio', // Le ponemos la etiqueta anuncio por si en el futuro quieres darles otro color
+                'fecha_envio'     => date('Y-m-d H:i:s')
+            ];
+            
+            $mensajeModel->insert($msgData);
+
+            // Actualizamos la hora para que el chat suba arriba del todo en la barra lateral del usuario
+            $chatModel->update($chatId, ['ultimo_mensaje_at' => date('Y-m-d H:i:s')]);
+            
+            $mensajesEnviados++;
+        }
+
+        return $this->respondCreated([
+            'status' => 'success',
+            'message' => "Aviso global entregado a $mensajesEnviados miembros del club."
+        ]);
     }
 }

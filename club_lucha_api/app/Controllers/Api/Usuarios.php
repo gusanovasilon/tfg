@@ -56,8 +56,7 @@ class Usuarios extends ResourceController
         $nuevoId = $model->insert($data);
 
         if ($nuevoId) {
-            // 5. Devolvemos el ID y los datos (sin password)
-            // Esto es CRUCIAL para que Angular sepa qué ID usar para guardar la ficha después
+            // Devolvemos el ID y los datos (sin password)
             $usuarioCreado = $model->find($nuevoId);
             unset($usuarioCreado['password']);
 

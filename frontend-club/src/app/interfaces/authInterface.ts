@@ -14,6 +14,7 @@ export interface Usuario {
     email: string;
     rol: RolUsuario;
     password?:string;
+    foto_url?:string;
 }
 
 /* datos de logueo */
@@ -31,4 +32,5 @@ export interface LoginResponse {
     nombre: string;
     apellidos: string;
     email: string;
+    foto_url?:string;
 }

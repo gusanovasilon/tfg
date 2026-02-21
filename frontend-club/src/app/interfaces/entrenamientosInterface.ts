@@ -1,36 +1,32 @@
-// src/app/interfaces/entrenamientos.interfaces.ts
 
-// 1. INTERFAZ PARA LAS CLASES (Entrenamientos)
 export interface Entrenamiento {
-    id: number;
-    titulo: string;
-    descripcion?: string;
-    fecha_hora: string;   // Viene como string del backend "2026-02-10 18:30:00"
-    ubicacion: string;
-    entrenador_id: number;
+  id: number;
+  titulo: string;
+  descripcion?: string;
+  fecha_hora: string;
+  ubicacion: string;
+  entrenador_id: number;
 
-    // Campos extra que vienen del JOIN con usuarios y perfiles
-    nombre_entrenador?: string;
-    apellido_entrenador?: string;
-    foto_entrenador?: string;       // De la tabla perfiles_entrenadores
-    especialidad_entrenador?: string; // De la tabla perfiles_entrenadores
+  // Datos del LEFT JOIN con la tabla usuarios
+  nombre_entrenador?: string;
+  apellidos_entrenador?: string;
+
+  // Campo dinámico que creamos en el backend para saber si el atleta actual está inscrito
+  apuntado?: boolean;
 }
 
-// 2. INTERFAZ PARA LAS INSCRIPCIONES (Relación Usuario <-> Clase)
-export interface Inscripcion {
-    id: number;
-    usuario_id: number;
-    entrenamiento_id: number;
-    fecha_inscripcion: string;
-    asistencia: number; // 0 = No, 1 = Sí (TinyInt en SQL es number en JS)
+// =======================================================
+// INTERFAZ DE LA LISTA DE ASISTENTES (Para el Entrenador)
+// =======================================================
+export interface Asistente {
+  id: number;  //id de la tabla inscripciones
+  usuario_id: number;
+  entrenamiento_id: number;
+  fecha_inscripcion: string;
+  asistencia: number; // 0 o 1
 
-    // Datos extra útiles para listar alumnos (Dashboard Entrenador)
-    nombre_alumno?: string;
-    apellidos_alumno?: string;
-    peso_alumno?: number;       // Del perfil atleta
-    categoria_alumno?: string;  // Del perfil atleta
-
-    // Datos extra útiles para "Mis Clases" (Dashboard Atleta)
-    titulo_clase?: string;
-    fecha_clase?: string;
+  // Datos del JOIN con usuarios y perfiles_atletas
+  nombre: string;
+  apellidos: string;
+  foto_url?: string;
 }

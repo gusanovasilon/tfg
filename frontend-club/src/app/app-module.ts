@@ -28,6 +28,8 @@ import { MisClases } from './pages/dashboard/training/mis-clases/mis-clases';
 import { GestionEntrenamientos } from './pages/dashboard/training/gestion-entrenamientos/gestion-entrenamientos';
 import { NoticiasEscritor } from './pages/dashboard/content/noticias-escritor/noticias-escritor';
 import { Mensajes } from './pages/dashboard/common/mensajes/mensajes';
+import { Adminmensajes } from './pages/dashboard/admin/adminmensajes/adminmensajes';
+
 
 
 
@@ -55,7 +57,9 @@ import { Mensajes } from './pages/dashboard/common/mensajes/mensajes';
     MisClases,
     GestionEntrenamientos,
     NoticiasEscritor,
-    Mensajes
+    Mensajes,
+    Adminmensajes
+
 
 
   ],
@@ -64,7 +68,7 @@ import { Mensajes } from './pages/dashboard/common/mensajes/mensajes';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+
   ],
   providers: [
     provideBrowserGlobalErrorListeners()

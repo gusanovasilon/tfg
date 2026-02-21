@@ -20,6 +20,7 @@ import { NoticiasEscritor } from './pages/dashboard/content/noticias-escritor/no
 
 import { Mensajes } from './pages/dashboard/common/mensajes/mensajes';
 import { mensajesGuard } from './guards/mensajesGuard';
+import { Adminmensajes } from './pages/dashboard/admin/adminmensajes/adminmensajes';
 
 const routes: Routes = [
   {
@@ -53,6 +54,11 @@ const routes: Routes = [
       {
         path: 'usuarios',
         component: Usuarios,
+        canActivate: [adminGuard]
+      },
+      {
+        path: 'admin-mensajes',
+        component: Adminmensajes,
         canActivate: [adminGuard]
       },
       {

@@ -1,154 +1,169 @@
-<div class="panel-header">
-  <div class="header-content">
-    <div>
-      <h2>CENTRO DE <span class="highlight">MENSAJES</span></h2>
-      <p>
-        @if(esAdmin) { Supervisión de conversaciones }
-        @else { Tu buzón de entrada }
-      </p>
+<div class="club-layout">
+
+  <div class="sidebar-panel">
+
+    <div class="sidebar-header">
+      <div class="user-profile">
+        <div class="avatar-placeholder">{{ usuarioLogueado.nombre.charAt(0) }}</div>
+        <div class="user-meta">
+          <h3>{{ usuarioLogueado.nombre }}</h3>
+          <span class="role-badge">{{ usuarioLogueado.rol }}</span>
+        </div>
+      </div>
+      <button class="btn-new-chat" (click)="abrirModalNuevo()" title="Nueva Conversación">
+        <i class="bi bi-plus-lg"></i>
+      </button>
     </div>
 
-    <button class="btn-new" (click)="abrirModalNuevo()">
-      <i class="bi bi-send-fill"></i> Redactar Mensaje
-    </button>
-  </div>
-</div>
+    <div class="search-bar">
+      <i class="bi bi-search"></i>
+      <input type="text" placeholder="Buscar compañero...">
+    </div>
 
-<div class="container-mensajes">
+    <div class="conversations-list">
 
-  @if (cargando) {
-    <div class="loading">Cargando comunicaciones...</div>
-  } @else {
+      @for (chat of listaConversaciones; track chat.conversacion_id) {
 
-    @if (vistaActual === 'ADMIN_LISTA') {
-      <div class="table-responsive">
-        <table class="dashboard-table">
-          <thead>
-            <tr>
-              <th>Interlocutores</th>
-              <th>Total Msj</th>
-              <th>Último Activo</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (chat of listaConversaciones; track chat.usuario_1_id) {
-              <tr>
-                <td>
-                  <div class="chat-participants">
-                    <span class="badge-role">{{ chat.rol_u1 }}</span> {{ chat.nombre_u1 }}
-                    <i class="bi bi-arrow-left-right mx-2"></i>
-                    <span class="badge-role">{{ chat.rol_u2 }}</span> {{ chat.nombre_u2 }}
-                  </div>
-                </td>
-                <td>{{ chat.total_mensajes }}</td>
-                <td>{{ chat.ultimo_mensaje | date:'short' }}</td>
-                <td>
-                  <button class="btn-action btn-view" (click)="verChatCompleto(chat.usuario_1_id, chat.usuario_2_id)" title="Leer Chat">
-                    <i class="bi bi-eye-fill"></i>
-                  </button>
-                  <button class="btn-action btn-delete" (click)="borrarConversacion(chat.usuario_1_id, chat.usuario_2_id)" title="Borrar Todo">
-                    <i class="bi bi-trash-fill"></i>
-                  </button>
-                </td>
-              </tr>
-            } @empty {
-              <tr><td colspan="4" class="text-center">No hay conversaciones activas.</td></tr>
-            }
-          </tbody>
-        </table>
-      </div>
-    }
+        <div class="conversation-item"
+             [class.active]="chatActivo?.conversacion_id === chat.conversacion_id"
+             (click)="abrirChat(chat)">
 
-    @if (vistaActual === 'INBOX') {
-      <div class="inbox-container">
-        @for (msg of misMensajes; track msg.id) {
-          <div class="mensaje-card" [class.anuncio]="msg.tipo === 'anuncio'">
-            <div class="msg-icon">
-              @if(msg.tipo === 'anuncio') { <i class="bi bi-megaphone-fill"></i> }
-              @else { <i class="bi bi-envelope-fill"></i> }
-            </div>
-            <div class="msg-content">
-              <div class="msg-header">
-                <span class="remitente">
-                  {{ msg.nombre_remitente }} {{ msg.apellidos_remitente }}
-                  @if(msg.rol_remitente === 'admin') { <span class="badge-admin">Admin</span> }
+          <div class="chat-avatar">
+            {{ chat.deleted_at_otro ? '?' : chat.nombre_otro?.charAt(0) }}
+          </div>
+
+          <div class="chat-info">
+            <div class="chat-top">
+              @if (chat.deleted_at_otro) {
+                <span class="chat-name text-muted" style="font-style: italic;">
+                  <i class="bi bi-person-x"></i> Usuario Eliminado
                 </span>
-                <span class="fecha">{{ msg.fecha_envio | date:'dd/MM HH:mm' }}</span>
-              </div>
-              <h4 class="asunto">{{ msg.asunto }}</h4>
-              <p class="cuerpo">{{ msg.cuerpo }}</p>
+              } @else {
+                <span class="chat-name">{{ chat.nombre_otro }} {{ chat.apellidos_otro }}</span>
+              }
+              <span class="chat-time">{{ chat.ultimo_mensaje_at | date:'HH:mm' }}</span>
+            </div>
+
+            <div class="chat-bottom">
+              @if (chat.ultimo_mensaje) {
+                <p class="last-msg">{{ chat.ultimo_mensaje }}</p>
+              } @else {
+                <p class="last-msg" style="font-style: italic; color: #94a3b8;">Chat nuevo</p>
+              }
             </div>
           </div>
-        } @empty {
-          <div class="empty-state">No tienes mensajes recibidos.</div>
-        }
+
+        </div>
+
+      } @empty {
+
+        <div class="empty-state-sidebar">
+          <i class="bi bi-chat-square-text"></i>
+          <p>Sin conversaciones</p>
+        </div>
+
+      }
+
+    </div>
+  </div>
+
+  <div class="chat-panel">
+
+    @if (!chatActivo) {
+    <div class="no-chat-selected">
+      <div class="empty-content">
+        <div class="logo-placeholder"><i class="bi bi-shield-shaded"></i></div>
+        <h2>Club de Lucha Quart</h2>
+        <p>Selecciona un contacto de la lista o inicia un nuevo chat.</p>
       </div>
-    }
+    </div>
+    } @else {
+    <div class="active-chat-container">
 
-    @if (vistaActual === 'CHAT_DETALLE') {
-      <div class="chat-detalle-container">
-        <button class="btn-back" (click)="volverALista()">
-          <i class="bi bi-arrow-left"></i> Volver a la lista
-        </button>
+        <div class="header-info">
+            <div class="chat-avatar small">
+               {{ chatActivo.deleted_at_otro ? '?' : chatActivo.nombre_otro?.charAt(0) }}
+            </div>
 
-        <div class="chat-history">
+            <div class="header-text">
+              @if (chatActivo.deleted_at_otro) {
+                <h4 style="color: #64748b;">Usuario Eliminado</h4>
+                <span class="status-text text-muted">Cuenta desactivada</span>
+              } @else {
+                <h4>{{ chatActivo.nombre_otro }} {{ chatActivo.apellidos_otro }}</h4>
+                <span class="status-text">{{ chatActivo.rol_otro }}</span>
+              }
+            </div>
+          </div>
+
+        <div class="messages-area" #scrollMe [scrollTop]="scrollMe.scrollHeight">
           @for (msg of chatDetalle; track msg.id) {
-            <div class="chat-bubble" [class.left]="true"> <div class="bubble-info">
-                <strong>{{ msg.nombre_remitente }}</strong> ({{ msg.rol_remitente }})
-                <span class="time">{{ msg.fecha_envio | date:'shortTime' }}</span>
-              </div>
-              <div class="bubble-text">{{ msg.cuerpo }}</div>
+          <div class="message-row"
+            [ngClass]="{'msg-sent': msg.remitente_id === usuarioLogueado.id, 'msg-received': msg.remitente_id !== usuarioLogueado.id}">
+
+            <div class="message-bubble">
+              <p>{{ msg.cuerpo }}</p>
+              <span class="msg-time">
+                {{ msg.fecha_envio | date:'HH:mm' }}
+              </span>
+            </div>
+
+          </div>
+          }
+        </div>
+
+        <div class="input-area">
+          @if (chatActivo.deleted_at_otro) {
+            <div class="alert-deleted-chat">
+              <i class="bi bi-info-circle-fill"></i>
+              No puedes responder a esta conversación porque la cuenta de este usuario ya no existe.
+            </div>
+          } @else {
+            <div class="input-wrapper">
+              <input type="text" placeholder="Escribe tu mensaje..." [(ngModel)]="nuevoMensaje.cuerpo"
+                (keyup.enter)="enviarDesdeChat()">
+              <button class="btn-send" (click)="enviarDesdeChat()" [disabled]="!nuevoMensaje.cuerpo.trim()">
+                <i class="bi bi-send-fill"></i>
+              </button>
             </div>
           }
         </div>
+
       </div>
     }
+  </div>
 
-  }
 </div>
 
 @if (mostrarModalNuevo) {
-  <div class="modal-backdrop">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3>Nuevo Mensaje</h3>
-        <button class="btn-close" (click)="cerrarModal()"><i class="bi bi-x-lg"></i></button>
+<div class="modal-backdrop">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>Nuevo Chat</h3>
+      <button class="btn-close" (click)="cerrarModal()"><i class="bi bi-x-lg"></i></button>
+    </div>
+
+    <div class="modal-body">
+      <label>Elige oponente:</label>
+      <div class="select-wrapper">
+        <select class="custom-select" [(ngModel)]="nuevoMensaje.destinatario_id">
+          <option [ngValue]="0" disabled>Seleccionar usuario...</option>
+          @for (usuario of listaUsuarios; track usuario.id) {
+          @if (!tieneChat(usuario.id)){
+          <option [ngValue]="usuario.id">
+            {{ usuario.nombre }} {{ usuario.apellidos }} ({{ usuario.rol }})
+          </option>
+          }
+          }
+        </select>
       </div>
-      <div class="modal-body">
-        <form (ngSubmit)="enviar()">
 
-          <div class="form-group">
-            <label>Destinatario</label>
-            <select [(ngModel)]="nuevoMensaje.destinatario_id" name="destinatario" class="form-control">
-              <option [value]="0" disabled selected>Selecciona un usuario...</option>
+    </div>
 
-              @if(esAdmin) { <option [value]="0" class="opt-broadcast">📢 ENVIAR A TODOS (Anuncio)</option> }
-
-              @for (user of listaUsuarios; track user.id) {
-                <option [value]="user.id">
-                  {{ user.nombre }} {{ user.apellidos }} ({{ user.rol }})
-                </option>
-              }
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>Asunto</label>
-            <input type="text" [(ngModel)]="nuevoMensaje.asunto" name="asunto" class="form-control" required placeholder="Ej: Cambio de horario...">
-          </div>
-
-          <div class="form-group">
-            <label>Mensaje</label>
-            <textarea [(ngModel)]="nuevoMensaje.cuerpo" name="cuerpo" class="form-control" rows="5" required></textarea>
-          </div>
-
-          <div class="modal-footer">
-            <button type="button" class="btn-cancel" (click)="cerrarModal()">Cancelar</button>
-            <button type="submit" class="btn-save">Enviar Mensaje</button>
-          </div>
-        </form>
-      </div>
+    <div class="modal-footer">
+      <button class="btn-flat" (click)="cerrarModal()">Cancelar</button>
+      <button class="btn-solid" (click)="enviar()">Abrir Chat</button>
     </div>
   </div>
+</div>
 }

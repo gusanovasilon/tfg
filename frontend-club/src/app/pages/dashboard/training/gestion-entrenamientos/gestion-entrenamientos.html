@@ -1,1 +1,174 @@
-<p>gestion-entrenamientos works!</p>
+<div class="gestion-container">
+  <div class="header-section">
+    <div>
+      <h2>Gestión de Entrenamientos</h2>
+      <p class="text-muted">Administra tus clases y pasa lista al tatami</p>
+    </div>
+    <button class="btn-nueva-clase" (click)="toggleFormulario()">
+      @if (mostrarFormulario) {
+        <i class="bi bi-x-lg"></i> Cancelar
+      } @else {
+        <i class="bi bi-plus-lg"></i> Nueva Sesión
+      }
+    </button>
+  </div>
+
+ @if (mostrarFormulario) {
+    <div class="form-container fade-in">
+      <h3>{{ modoEdicion ? 'Editar Sesión' : 'Crear Nueva Sesión' }}</h3>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Título de la sesión *</label>
+          <input type="text" [(ngModel)]="nuevaClase.titulo" placeholder="Ej: Sparring avanzado">
+        </div>
+        <div class="form-group">
+          <label>Fecha y Hora *</label>
+          <input type="datetime-local" [(ngModel)]="nuevaClase.fecha_hora">
+        </div>
+        <div class="form-group">
+          <label>Ubicación *</label>
+          <input type="text" [(ngModel)]="nuevaClase.ubicacion" placeholder="Ej: Sala 1, Tatami Principal">
+        </div>
+        <div class="form-group full-width">
+          <label>Descripción (Opcional)</label>
+          <textarea [(ngModel)]="nuevaClase.descripcion" rows="2" placeholder="Material necesario, enfoque de la clase..."></textarea>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn-guardar" (click)="guardarClase()">
+          {{ modoEdicion ? 'Guardar Cambios' : 'Publicar Entrenamiento' }}
+        </button>
+      </div>
+
+    </div>
+  }
+
+  @if (cargando) {
+    <div class="loading-state">
+      <div class="spinner-border text-primary" role="status"></div>
+      <p>Cargando tus sesiones...</p>
+    </div>
+  } @else {
+
+    <div class="entrenamientos-grid">
+      @for (entreno of misEntrenamientos; track entreno.id) {
+
+        <div class="card-entreno" [class.is-past]="entrenamientoPasado(entreno.fecha_hora)">
+
+          <div class="card-header">
+            <div class="title-wrapper">
+              <h3>{{ entreno.titulo }}</h3>
+              @if (entrenamientoPasado(entreno.fecha_hora)) {
+                <span class="badge-past">Finalizado</span>
+                <button class="btn-icon text-danger" (click)="borrarClase(entreno.id)" title="Eliminar clase">
+                <i class="bi bi-trash3-fill"></i>
+              </button>
+              }
+            </div>
+
+           @if (!entrenamientoPasado(entreno.fecha_hora)) {
+              <div style="display: flex; gap: 10px;">
+                <button class="btn-icon" style="color: #3b82f6;" (click)="abrirEdicion(entreno)" title="Editar clase">
+                  <i class="bi bi-pencil-square"></i>
+                </button>
+
+                <button class="btn-icon text-danger" (click)="borrarClase(entreno.id)" title="Cancelar clase">
+                  <i class="bi bi-trash3-fill"></i>
+                </button>
+              </div>
+            }
+          </div>
+
+          <div class="card-body">
+            <p><i class="bi bi-calendar-event text-orange"></i> {{ entreno.fecha_hora | date:'dd/MM/yyyy HH:mm' }}</p>
+            <p><i class="bi bi-geo-alt text-orange"></i> {{ entreno.ubicacion }}</p>
+            @if (entreno.descripcion) {
+              <p class="desc-preview">{{ entreno.descripcion }}</p>
+            }
+          </div>
+
+          <div class="card-footer">
+            <button class="btn-asistentes" (click)="abrirModalAsistentes(entreno)">
+              <i class="bi bi-people-fill"></i> Pasar Lista / Ver Atletas
+            </button>
+          </div>
+
+        </div>
+      }
+
+</div>
+  }
+
+  @if (mostrarModalAsistentes) {
+  <div class="modal-overlay" (click)="cerrarModalAsistentes()">
+    <div class="modal-content fade-in-up" (click)="$event.stopPropagation()">
+
+      <div class="modal-header">
+        <h3><i class="bi bi-card-checklist text-orange"></i> {{ entrenamientoSeleccionadoObj?.titulo }}</h3>
+        <button class="btn-cerrar-modal" (click)="cerrarModalAsistentes()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      @if (entrenamientoPasado(entrenamientoSeleccionadoObj!.fecha_hora)) {
+              <div class="stats-dashboard mb-3">
+                <div class="stat-box">
+                  <span class="stat-title">Inscritos</span>
+                  <span class="stat-value text-blue">{{ totalInscritos }}</span>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-title">Han asistido</span>
+                  <span class="stat-value text-green">{{ totalAsistentes }}</span>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-title">Faltas</span>
+                  <span class="stat-value text-red">{{ totalFaltas }}</span>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-title">Éxito</span>
+                  <span class="stat-value" [class.text-green]="porcentajeAsistencia >= 50" [class.text-red]="porcentajeAsistencia < 50">
+                    {{ porcentajeAsistencia }}%
+                  </span>
+                </div>
+              </div>
+            }
+      <div class="modal-body">
+        @if (cargandoAsistentes) {
+          <div class="loading-state">
+            <div class="spinner-border text-primary" role="status"></div>
+            <p>Buscando en el vestuario...</p>
+          </div>
+        } @else {
+
+          @if (atletasAsistentes.length === 0) {
+            <div class="empty-state p-3">
+              <i class="bi bi-person-x text-muted" style="font-size: 2.5rem;"></i>
+              <p>Nadie se ha apuntado a esta sesión todavía.</p>
+            </div>
+          } @else {
+            <ul class="lista-asistentes">
+              @for (atleta of atletasAsistentes; track atleta.id) {
+                <li class="atleta-item">
+                  <div class="info-atleta">
+                    <i class="bi bi-person-circle"></i>
+                    <span>{{ atleta.nombre }} {{ atleta.apellidos }}</span>
+                  </div>
+
+                  @if (entrenamientoPasado(entrenamientoSeleccionadoObj!.fecha_hora)) {
+                    <label class="switch">
+                      <input type="checkbox" [checked]="atleta.asistencia == 1" (change)="toggleAsistencia(atleta)">
+                      <span class="slider round"></span>
+                    </label>
+                  } @else {
+                    <span class="badge-pendiente"><i class="bi bi-clock"></i> Pendiente</span>
+                  }
+                </li>
+              }
+            </ul>
+          }
+        }
+      </div>
+    </div>
+  </div>
+}

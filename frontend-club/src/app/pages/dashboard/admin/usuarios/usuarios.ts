@@ -199,10 +199,23 @@ export class Usuarios implements OnInit {
     }
     // === CASO 2: CREAR NUEVO USUARIO ===
     else {
-      console.log(this.usuarioSeleccionado);
-
-      // Angular envía TODO, el backend procesa solo lo del usuario y devuelve el ID
-      this.usuariosService.createUsuario(this.usuarioSeleccionado).subscribe({ // Asegúrate de llamar a crearUsuario (o createUsuario según tu servicio)
+      if (!this.usuarioSeleccionado.nombre) {
+      Swal.fire('Error', 'El nombre no puede estar vacío', 'error');
+      return;
+    }
+    if (!this.usuarioSeleccionado.apellidos) {
+      Swal.fire('Error', 'Los apellidos no pueden estar vacíos', 'error');
+      return;
+    }
+    if (!this.usuarioSeleccionado.email) {
+      Swal.fire('Error', 'El email no puede estar vacío', 'error');
+      return;
+    }
+    if (!this.usuarioSeleccionado.rol) {
+      Swal.fire('Error', 'El rol no puede estar vacío', 'error');
+      return;
+    }
+    this.usuariosService.createUsuario(this.usuarioSeleccionado).subscribe({ // Asegúrate de llamar a crearUsuario (o createUsuario según tu servicio)
 
         next: (resp: any) => {
           // Recuperamos el ID que nos devuelve el Backend (Usuarios.php)

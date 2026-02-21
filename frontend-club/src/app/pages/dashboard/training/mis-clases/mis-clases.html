@@ -1,1 +1,77 @@
-<p>mis-clases works!</p>
+<div class="mis-clases-container">
+  <div class="header-section">
+    <h2>Tablón de Entrenamientos</h2>
+    <p class="text-muted">Apúntate a las próximas sesiones del club</p>
+
+    <div class="filtros-container">
+      <button class="btn-filtro"
+              [class.activo]="filtroActual === 'todos'"
+              (click)="cambiarFiltro('todos')">
+        <i class="bi bi-grid-fill"></i> Todas las clases
+      </button>
+      <button class="btn-filtro"
+              [class.activo]="filtroActual === 'apuntados'"
+              (click)="cambiarFiltro('apuntados')">
+        <i class="bi bi-bookmark-check-fill"></i> Mis Inscripciones
+      </button>
+    </div>
+  </div>
+
+  @if (cargando) {
+    <div class="loading-state">
+      <div class="spinner-border text-primary" role="status"></div>
+      <p>Cargando el tatami...</p>
+    </div>
+  } @else {
+
+    <div class="entrenamientos-grid">
+      @for (entreno of entrenamientosFiltrados; track entreno.id) {
+
+        <div class="card-entreno" [class.is-enrolled]="entreno.apuntado">
+          <div class="card-header">
+            <h3>{{ entreno.titulo }}</h3>
+            @if (entreno.apuntado) {
+              <span class="badge-enrolled"><i class="bi bi-check-circle-fill"></i> Inscrito</span>
+            }
+          </div>
+
+          <div class="card-body">
+            <p><i class="bi bi-calendar-event text-orange"></i> <strong>Fecha:</strong> {{ entreno.fecha_hora | date:'dd/MM/yyyy HH:mm' }}</p>
+            <p><i class="bi bi-geo-alt text-orange"></i> <strong>Lugar:</strong> {{ entreno.ubicacion }}</p>
+            <p><i class="bi bi-person-badge text-orange"></i> <strong>Coach:</strong> {{ entreno.nombre_entrenador }} {{ entreno.apellidos_entrenador }}</p>
+
+            @if (entreno.descripcion) {
+              <div class="desc-box">{{ entreno.descripcion }}</div>
+            }
+          </div>
+
+          <div class="card-footer">
+            @if (entrenamientoPasado(entreno.fecha_hora)) {
+              <button class="btn-toggle btn-finalizado" disabled>
+                <i class="bi bi-clock-history"></i> Finalizado
+              </button>
+            } @else {
+              <button class="btn-toggle" [ngClass]="entreno.apuntado ? 'btn-cancelar' : 'btn-apuntar'" (click)="toggleInscripcion(entreno)">
+                @if (entreno.apuntado) {
+                  <i class="bi bi-x-lg"></i> Cancelar Inscripción
+                } @else {
+                  <i class="bi bi-plus-lg"></i> Apuntarme
+                }
+              </button>
+            }
+          </div>
+        </div>
+
+      } @empty {
+        <div class="empty-state">
+          <i class="bi bi-calendar-x" style="font-size: 3rem; color: #64748b;"></i>
+          @if (filtroActual === 'apuntados') {
+            <p>Aún no te has apuntado a ninguna clase.</p>
+          } @else {
+            <p>No hay entrenamientos programados en este momento.</p>
+          }
+        </div>
+      }
+    </div>
+  }
+</div>

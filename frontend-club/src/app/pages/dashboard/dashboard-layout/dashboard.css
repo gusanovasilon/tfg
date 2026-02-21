@@ -5,10 +5,10 @@
   overflow: hidden; /* Evitamos scroll en el contenedor principal */
 }
 
-/* --- SIDEBAR (Izquierda) --- */
+
 .sidebar {
-  width: 280px; /* Ancho fijo */
-  background-color: #0f172a; /* Azul oscuro casi negro */
+  width: 280px;
+  background-color: #0f172a;
   color: white;
   display: flex;
   flex-direction: column;
@@ -18,7 +18,7 @@
   z-index: 100;
 }
 
-/* Perfil */
+
 .profile-section {
   text-align: center;
   margin-bottom: 25px;
@@ -26,10 +26,28 @@
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
+
 .profile-img {
-  font-size: 3.5rem;
-  color: #cbd5e1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 10px;
+  color: #cbd5e1;
+}
+
+
+.profile-img i {
+  font-size: 4rem;
+}
+
+
+.profile-img img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background-color: #fff;
 }
 
 .welcome { font-size: 0.75rem; color: #94a3b8; margin: 0; letter-spacing: 1px; }

@@ -55,7 +55,8 @@ export class AuthService {
       nombre: data.nombre,
       apellidos: data.apellidos,
       email: data.email,
-      rol: data.rol
+      rol: data.rol,
+      foto_url:data.foto_url
     };
 
     // Guardamos el objeto creado en el localstorage
@@ -75,7 +76,7 @@ export class AuthService {
 
   //Comprobacion rapida de si el usuario está logueado preguntando por el token
   get estaAutenticado(): any {
-    
+
     if (this.token) return true;
   }
 

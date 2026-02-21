@@ -1,26 +1,59 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Entrenamiento } from '../interfaces/entrenamientosInterface';
 import { environment } from '../../environments/environment';
+import { Entrenamiento } from '../interfaces/entrenamientosInterface';
+ // Ajusta la ruta a tu environment
 
 @Injectable({
   providedIn: 'root'
 })
 export class EntrenamientosService {
 
-  private apiUrl = environment.apiUrl;
+  private apiUrl = environment.apiUrl + "/entrenamientos";
 
   constructor(private http: HttpClient) { }
 
 
-  getEntrenamientos(soloFuturas: boolean = false): Observable<Entrenamiento[]> {
-    const params = soloFuturas ? '?proximas=true' : '';
-    return this.http.get<Entrenamiento[]>(`${this.apiUrl}/entrenamientos${params}`);
+  // Obtener el tablón de entrenamientos
+  getEntrenamientos(usuarioId?: number): Observable<any> {
+    if (usuarioId) {
+      // Si le pasamos ID, llama a: api/entrenamientos/12
+      return this.http.get(`${this.apiUrl}/${usuarioId}`);
+    }
+    // Si no, llama a: api/entrenamientos
+    return this.http.get(this.apiUrl);
   }
 
+  // 2. Crear nueva clase (Entrenador)
+  crearEntrenamiento(datos: any): Observable<any> {
+    return this.http.post(this.apiUrl, datos);
+  }
 
-  getEntrenamiento(id: number): Observable<Entrenamiento> {
-    return this.http.get<Entrenamiento>(`${this.apiUrl}/entrenamientos/${id}`);
+  // 3. Borrar clase (Entrenador)
+  borrarEntrenamiento(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  // 4. Apuntarse / Desapuntarse (Atleta)
+  toggleInscripcion(usuarioId: number, entrenamientoId: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/toggle-inscripcion`, {
+      usuario_id: usuarioId,
+      entrenamiento_id: entrenamientoId
+    });
+  }
+
+  // 5. Ver quién asiste a una clase (Entrenador)
+  getAsistentes(entrenamientoId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/asistentes/${entrenamientoId}`);
+  }
+
+  // 6. Pasar lista (Entrenador)
+  pasarLista(inscripcionId: number, asistencia: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/pasar-lista/${inscripcionId}`, { asistencia });
+  }
+
+  actualizarEntrenamiento(id: number, datos: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/update/${id}`, datos);
   }
 }

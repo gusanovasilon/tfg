@@ -1,0 +1,95 @@
+<div class="admin-mensajes-container">
+
+  @if (vistaActiva === 'tabla') {
+    <div class="panel-header">
+      <div class="header-text">
+        <h2>Panel de <span class="text-orange">Auditoría</span></h2>
+        <p>Supervisa las comunicaciones privadas del Club de Lucha Quart.</p>
+      </div>
+      <button class="btn-solid-orange" (click)="lanzarAvisoGlobal()" title="Difusión masiva">
+        <i class="bi bi-megaphone-fill"></i> Aviso Global
+      </button>
+    </div>
+
+    <div class="table-card">
+      <table class="dashboard-table">
+        <thead>
+          <tr>
+            <th>Sala de Combate (Participantes)</th>
+            <th>Última Actividad</th>
+            <th class="text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (chat of listaConversaciones; track chat.conversacion_id) {
+            <tr>
+              <td>
+                <div class="chat-participants">
+                  <div class="user-pill">
+                    <span class="role-dot" [title]="chat.rol_u1"></span>
+                    {{ chat.nombre_u1 }} {{ chat.apellidos_u1 || chat.ap_u1 }}
+                  </div>
+                  <i class="bi bi-arrow-left-right exchange-icon"></i>
+                  <div class="user-pill">
+                    <span class="role-dot" [title]="chat.rol_u2"></span>
+                    {{ chat.nombre_u2 }} {{ chat.apellidos_u2 || chat.ap_u2 }}
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="date-text">{{ chat.ultimo_mensaje_at | date:'dd/MM/yyyy HH:mm' }}</span>
+              </td>
+              <td class="actions-cell">
+                <button class="btn-icon btn-view" (click)="abrirChatAdmin(chat)" title="Auditar Chat">
+                  <i class="bi bi-eye-fill"></i>
+                </button>
+                <button class="btn-icon btn-delete" (click)="eliminarConversacion(chat.conversacion_id)" title="Vaciar Mensajes">
+                  <i class="bi bi-trash3-fill"></i>
+                </button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="3" class="empty-state">No hay conversaciones registradas en el sistema.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+  @if (vistaActiva === 'chat') {
+    <div class="spy-mode-header">
+      <button class="btn-back" (click)="volverTabla()">
+        <i class="bi bi-arrow-left"></i> Volver al Panel
+      </button>
+      <button class="btn-danger-solid" (click)="eliminarConversacion(chatActivo.conversacion_id)">
+        <i class="bi bi-eraser-fill"></i> Vaciar esta Conversación
+      </button>
+    </div>
+
+    <div class="chat-audit-box">
+      <div class="audit-info-bar">
+        <span><i class="bi bi-shield-lock-fill"></i> Auditoría de Sala ID: {{ chatActivo.conversacion_id }}</span>
+        <span>Participantes: {{ chatActivo.nombre_u1 }} y {{ chatActivo.nombre_u2 }}</span>
+      </div>
+
+      <div class="messages-area" #scrollMe>
+        @for (msg of chatDetalle; track msg.id) {
+          <div class="message-row">
+            <div class="message-bubble" [ngClass]="{'bg-user1': msg.remitente_id === chatActivo.usuario_1_id, 'bg-user2': msg.remitente_id !== chatActivo.usuario_1_id}">
+              <div class="msg-author">
+                {{ msg.nombre_remitente }}
+              </div>
+              <p class="msg-text">{{ msg.cuerpo }}</p>
+              <div class="msg-time">{{ msg.fecha_envio | date:'HH:mm' }}</div>
+            </div>
+          </div>
+        } @empty {
+          <div class="empty-state">Esta sala está actualmente vacía.</div>
+        }
+      </div>
+    </div>
+  }
+
+</div>

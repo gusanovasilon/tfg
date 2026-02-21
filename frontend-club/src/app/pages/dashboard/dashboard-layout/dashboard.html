@@ -4,7 +4,16 @@
 
     <div class="profile-section">
       <div class="profile-img">
-        <i class="bi bi-person-circle"></i>
+        @if (auth.usuario?.foto_url ) {
+        @if (auth.usuario?.rol == 'atleta') {
+        <img [src]="imgUrl + '/atletas/' + auth.usuario?.foto_url" alt="">
+        }@else {
+        <img [src]="imgUrl + '/entrenadores/' + auth.usuario?.foto_url" alt="">
+
+        }
+        }@else {
+        <i class="bi-person-circle"></i>
+        }
       </div>
       <div class="profile-info">
         <p class="welcome">BIENVENIDO:</p>
@@ -16,45 +25,45 @@
     <nav class="sidebar-menu">
 
       @if (auth.esAdmin) {
-        <p class="menu-label">ADMINISTRACIÓN</p>
+      <p class="menu-label">ADMINISTRACIÓN</p>
 
-        <a routerLink="usuarios" routerLinkActive="active" class="menu-item">
-          <i class="bi bi-people-fill"></i> Gestionar Usuarios
-        </a>
-        <a routerLink="mensajes-contacto" routerLinkActive="active" class="menu-item">
-          <i class="bi bi-envelope-paper-fill"></i> Buzón Web
-        </a>
-        <a routerLink="mensajes" routerLinkActive="active" class="menu-item">
-          <i class="bi bi-chat-left-dots-fill"></i> Monitorizar Chats
-        </a>
+      <a routerLink="usuarios" routerLinkActive="active" class="menu-item">
+        <i class="bi bi-people-fill"></i> Gestionar Usuarios
+      </a>
+      <a routerLink="mensajes-contacto" routerLinkActive="active" class="menu-item">
+        <i class="bi bi-envelope-paper-fill"></i> Buzón Web
+      </a>
+      <a routerLink="admin-mensajes" routerLinkActive="active" class="menu-item">
+        <i class="bi bi-chat-left-dots-fill"></i> Monitorizar Chats
+      </a>
       }
 
       @if (auth.esAdmin || auth.esEscritor) {
-        <p class="menu-label">REDACCIÓN</p>
-        <a routerLink="noticias-escritor" routerLinkActive="active" class="menu-item">
-          <i class="bi bi-newspaper"></i> Noticias
-        </a>
+      <p class="menu-label">REDACCIÓN</p>
+      <a routerLink="noticias-escritor" routerLinkActive="active" class="menu-item">
+        <i class="bi bi-newspaper"></i> Noticias
+      </a>
       }
 
       @if (auth.esAdmin || auth.esEntrenador) {
-        <p class="menu-label">GESTIÓN DEPORTIVA</p>
-        <a routerLink="gestion-entrenamientos" routerLinkActive="active" class="menu-item">
-          <i class="bi bi-calendar-check-fill"></i> Planificar Sesiones
-        </a>
+      <p class="menu-label">GESTIÓN DEPORTIVA</p>
+      <a routerLink="gestion-entrenamientos" routerLinkActive="active" class="menu-item">
+        <i class="bi bi-calendar-check-fill"></i> Planificar Sesiones
+      </a>
       }
 
       @if (auth.esAtleta) {
-        <p class="menu-label">MIS CLASES</p>
-        <a routerLink="mis-clases" routerLinkActive="active" class="menu-item">
-          <i class="bi bi-calendar-plus"></i> Calendario / Apuntarse
-        </a>
+      <p class="menu-label">MIS CLASES</p>
+      <a routerLink="mis-clases" routerLinkActive="active" class="menu-item">
+        <i class="bi bi-calendar-plus"></i> Calendario / Apuntarse
+      </a>
       }
 
       @if (auth.esEntrenador || auth.esAtleta) {
-        <p class="menu-label">COMUNICACIÓN</p>
-        <a routerLink="mensajes" routerLinkActive="active" class="menu-item">
-          <i class="bi bi-chat-text"></i> Chat Interno
-        </a>
+      <p class="menu-label">COMUNICACIÓN</p>
+      <a routerLink="mensajes" routerLinkActive="active" class="menu-item">
+        <i class="bi bi-chat-text"></i> Chat Interno
+      </a>
       }
 
       <p class="menu-label">MI CUENTA</p>

@@ -1,0 +1,670 @@
+ERROR - 2026-02-20 18:33:08 --> mysqli_sql_exception: Unknown column 'u2.deleted_at' in 'SELECT' in /var/www/html/tfg/club_lucha_api/system/Database/MySQLi/Connection.php:327
+Stack trace:
+#0 /var/www/html/tfg/club_lucha_api/system/Database/MySQLi/Connection.php(327): mysqli->query('SELECT `c`.`id`...', 0)
+#1 /var/www/html/tfg/club_lucha_api/system/Database/BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `c`.`id`...')
+#2 /var/www/html/tfg/club_lucha_api/system/Database/BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `c`.`id`...')
+#3 /var/www/html/tfg/club_lucha_api/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `c`.`id`...', Array, false)
+#4 /var/www/html/tfg/club_lucha_api/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 /var/www/html/tfg/club_lucha_api/system/BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+#6 /var/www/html/tfg/club_lucha_api/app/Models/ConversacionModel.php(66): CodeIgniter\BaseModel->findAll()
+#7 /var/www/html/tfg/club_lucha_api/app/Controllers/Api/Mensajes.php(34): App\Models\ConversacionModel->getMisConversaciones('5')
+#8 /var/www/html/tfg/club_lucha_api/system/CodeIgniter.php(933): App\Controllers\Api\Mensajes->index('5')
+#9 /var/www/html/tfg/club_lucha_api/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Mensajes))
+#10 /var/www/html/tfg/club_lucha_api/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 /var/www/html/tfg/club_lucha_api/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 /var/www/html/tfg/club_lucha_api/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 /var/www/html/tfg/club_lucha_api/public/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2026-02-20 18:33:09 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'u2.deleted_at' in 'SELECT'
+[Method: GET, Route: api/mensajes/5]
+in SYSTEMPATH/Database/BaseConnection.php on line 684.
+ 1 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = :c.usuario_1_id:
+OR `c`.`usuario_2_id` = :c.usuario_2_id:
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC', [...], false)
+ 2 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH/Models/ConversacionModel.php(66): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH/Controllers/Api/Mensajes.php(34): App\Models\ConversacionModel->getMisConversaciones('5')
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\Mensajes->index('5')
+ 7 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Mensajes))
+ 8 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-20 18:33:09 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'u2.deleted_at' in 'SELECT'
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 332.
+ 1 SYSTEMPATH/Database/BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = 5
+OR `c`.`usuario_2_id` = 5
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC')
+ 2 SYSTEMPATH/Database/BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = 5
+OR `c`.`usuario_2_id` = 5
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC')
+ 3 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = :c.usuario_1_id:
+OR `c`.`usuario_2_id` = :c.usuario_2_id:
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC', [...], false)
+ 4 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH/Models/ConversacionModel.php(66): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH/Controllers/Api/Mensajes.php(34): App\Models\ConversacionModel->getMisConversaciones('5')
+ 8 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\Mensajes->index('5')
+ 9 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Mensajes))
+10 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-20 18:33:09 --> [Caused by] mysqli_sql_exception: Unknown column 'u2.deleted_at' in 'SELECT'
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 327.
+ 1 SYSTEMPATH/Database/MySQLi/Connection.php(327): mysqli->query('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = 5
+OR `c`.`usuario_2_id` = 5
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC', 0)
+ 2 SYSTEMPATH/Database/BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = 5
+OR `c`.`usuario_2_id` = 5
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC')
+ 3 SYSTEMPATH/Database/BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = 5
+OR `c`.`usuario_2_id` = 5
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC')
+ 4 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = :c.usuario_1_id:
+OR `c`.`usuario_2_id` = :c.usuario_2_id:
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC', [...], false)
+ 5 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH/Models/ConversacionModel.php(66): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH/Controllers/Api/Mensajes.php(34): App\Models\ConversacionModel->getMisConversaciones('5')
+ 9 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\Mensajes->index('5')
+10 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Mensajes))
+11 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-02-20 18:33:18 --> mysqli_sql_exception: Unknown column 'u2.deleted_at' in 'SELECT' in /var/www/html/tfg/club_lucha_api/system/Database/MySQLi/Connection.php:327
+Stack trace:
+#0 /var/www/html/tfg/club_lucha_api/system/Database/MySQLi/Connection.php(327): mysqli->query('SELECT `c`.`id`...', 0)
+#1 /var/www/html/tfg/club_lucha_api/system/Database/BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `c`.`id`...')
+#2 /var/www/html/tfg/club_lucha_api/system/Database/BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `c`.`id`...')
+#3 /var/www/html/tfg/club_lucha_api/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `c`.`id`...', Array, false)
+#4 /var/www/html/tfg/club_lucha_api/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 /var/www/html/tfg/club_lucha_api/system/BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+#6 /var/www/html/tfg/club_lucha_api/app/Models/ConversacionModel.php(66): CodeIgniter\BaseModel->findAll()
+#7 /var/www/html/tfg/club_lucha_api/app/Controllers/Api/Mensajes.php(34): App\Models\ConversacionModel->getMisConversaciones('5')
+#8 /var/www/html/tfg/club_lucha_api/system/CodeIgniter.php(933): App\Controllers\Api\Mensajes->index('5')
+#9 /var/www/html/tfg/club_lucha_api/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Mensajes))
+#10 /var/www/html/tfg/club_lucha_api/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 /var/www/html/tfg/club_lucha_api/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 /var/www/html/tfg/club_lucha_api/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 /var/www/html/tfg/club_lucha_api/public/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2026-02-20 18:33:18 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'u2.deleted_at' in 'SELECT'
+[Method: GET, Route: api/mensajes/5]
+in SYSTEMPATH/Database/BaseConnection.php on line 684.
+ 1 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = :c.usuario_1_id:
+OR `c`.`usuario_2_id` = :c.usuario_2_id:
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC', [...], false)
+ 2 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH/Models/ConversacionModel.php(66): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH/Controllers/Api/Mensajes.php(34): App\Models\ConversacionModel->getMisConversaciones('5')
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\Mensajes->index('5')
+ 7 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Mensajes))
+ 8 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-20 18:33:18 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'u2.deleted_at' in 'SELECT'
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 332.
+ 1 SYSTEMPATH/Database/BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = 5
+OR `c`.`usuario_2_id` = 5
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC')
+ 2 SYSTEMPATH/Database/BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = 5
+OR `c`.`usuario_2_id` = 5
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC')
+ 3 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = :c.usuario_1_id:
+OR `c`.`usuario_2_id` = :c.usuario_2_id:
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC', [...], false)
+ 4 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH/Models/ConversacionModel.php(66): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH/Controllers/Api/Mensajes.php(34): App\Models\ConversacionModel->getMisConversaciones('5')
+ 8 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\Mensajes->index('5')
+ 9 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Mensajes))
+10 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-20 18:33:18 --> [Caused by] mysqli_sql_exception: Unknown column 'u2.deleted_at' in 'SELECT'
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 327.
+ 1 SYSTEMPATH/Database/MySQLi/Connection.php(327): mysqli->query('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = 5
+OR `c`.`usuario_2_id` = 5
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC', 0)
+ 2 SYSTEMPATH/Database/BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = 5
+OR `c`.`usuario_2_id` = 5
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC')
+ 3 SYSTEMPATH/Database/BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = 5
+OR `c`.`usuario_2_id` = 5
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC')
+ 4 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = :c.usuario_1_id:
+OR `c`.`usuario_2_id` = :c.usuario_2_id:
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC', [...], false)
+ 5 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH/Models/ConversacionModel.php(66): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH/Controllers/Api/Mensajes.php(34): App\Models\ConversacionModel->getMisConversaciones('5')
+ 9 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\Mensajes->index('5')
+10 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Mensajes))
+11 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-02-20 18:33:57 --> mysqli_sql_exception: Unknown column 'u2.deleted_at' in 'SELECT' in /var/www/html/tfg/club_lucha_api/system/Database/MySQLi/Connection.php:327
+Stack trace:
+#0 /var/www/html/tfg/club_lucha_api/system/Database/MySQLi/Connection.php(327): mysqli->query('SELECT `c`.`id`...', 0)
+#1 /var/www/html/tfg/club_lucha_api/system/Database/BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `c`.`id`...')
+#2 /var/www/html/tfg/club_lucha_api/system/Database/BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `c`.`id`...')
+#3 /var/www/html/tfg/club_lucha_api/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `c`.`id`...', Array, false)
+#4 /var/www/html/tfg/club_lucha_api/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 /var/www/html/tfg/club_lucha_api/system/BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+#6 /var/www/html/tfg/club_lucha_api/app/Models/ConversacionModel.php(66): CodeIgniter\BaseModel->findAll()
+#7 /var/www/html/tfg/club_lucha_api/app/Controllers/Api/Mensajes.php(34): App\Models\ConversacionModel->getMisConversaciones('5')
+#8 /var/www/html/tfg/club_lucha_api/system/CodeIgniter.php(933): App\Controllers\Api\Mensajes->index('5')
+#9 /var/www/html/tfg/club_lucha_api/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Mensajes))
+#10 /var/www/html/tfg/club_lucha_api/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 /var/www/html/tfg/club_lucha_api/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 /var/www/html/tfg/club_lucha_api/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 /var/www/html/tfg/club_lucha_api/public/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2026-02-20 18:33:57 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'u2.deleted_at' in 'SELECT'
+[Method: GET, Route: api/mensajes/5]
+in SYSTEMPATH/Database/BaseConnection.php on line 684.
+ 1 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = :c.usuario_1_id:
+OR `c`.`usuario_2_id` = :c.usuario_2_id:
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC', [...], false)
+ 2 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH/Models/ConversacionModel.php(66): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH/Controllers/Api/Mensajes.php(34): App\Models\ConversacionModel->getMisConversaciones('5')
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\Mensajes->index('5')
+ 7 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Mensajes))
+ 8 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-20 18:33:57 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'u2.deleted_at' in 'SELECT'
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 332.
+ 1 SYSTEMPATH/Database/BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = 5
+OR `c`.`usuario_2_id` = 5
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC')
+ 2 SYSTEMPATH/Database/BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = 5
+OR `c`.`usuario_2_id` = 5
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC')
+ 3 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = :c.usuario_1_id:
+OR `c`.`usuario_2_id` = :c.usuario_2_id:
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC', [...], false)
+ 4 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH/Models/ConversacionModel.php(66): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH/Controllers/Api/Mensajes.php(34): App\Models\ConversacionModel->getMisConversaciones('5')
+ 8 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\Mensajes->index('5')
+ 9 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Mensajes))
+10 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-20 18:33:57 --> [Caused by] mysqli_sql_exception: Unknown column 'u2.deleted_at' in 'SELECT'
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 327.
+ 1 SYSTEMPATH/Database/MySQLi/Connection.php(327): mysqli->query('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = 5
+OR `c`.`usuario_2_id` = 5
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC', 0)
+ 2 SYSTEMPATH/Database/BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = 5
+OR `c`.`usuario_2_id` = 5
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC')
+ 3 SYSTEMPATH/Database/BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = 5
+OR `c`.`usuario_2_id` = 5
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC')
+ 4 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = :c.usuario_1_id:
+OR `c`.`usuario_2_id` = :c.usuario_2_id:
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC', [...], false)
+ 5 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH/Models/ConversacionModel.php(66): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH/Controllers/Api/Mensajes.php(34): App\Models\ConversacionModel->getMisConversaciones('5')
+ 9 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\Mensajes->index('5')
+10 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Mensajes))
+11 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-02-20 18:34:38 --> mysqli_sql_exception: Unknown column 'u2.deleted_at' in 'SELECT' in /var/www/html/tfg/club_lucha_api/system/Database/MySQLi/Connection.php:327
+Stack trace:
+#0 /var/www/html/tfg/club_lucha_api/system/Database/MySQLi/Connection.php(327): mysqli->query('SELECT `c`.`id`...', 0)
+#1 /var/www/html/tfg/club_lucha_api/system/Database/BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `c`.`id`...')
+#2 /var/www/html/tfg/club_lucha_api/system/Database/BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `c`.`id`...')
+#3 /var/www/html/tfg/club_lucha_api/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `c`.`id`...', Array, false)
+#4 /var/www/html/tfg/club_lucha_api/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 /var/www/html/tfg/club_lucha_api/system/BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+#6 /var/www/html/tfg/club_lucha_api/app/Models/ConversacionModel.php(66): CodeIgniter\BaseModel->findAll()
+#7 /var/www/html/tfg/club_lucha_api/app/Controllers/Api/Mensajes.php(34): App\Models\ConversacionModel->getMisConversaciones('5')
+#8 /var/www/html/tfg/club_lucha_api/system/CodeIgniter.php(933): App\Controllers\Api\Mensajes->index('5')
+#9 /var/www/html/tfg/club_lucha_api/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Mensajes))
+#10 /var/www/html/tfg/club_lucha_api/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 /var/www/html/tfg/club_lucha_api/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 /var/www/html/tfg/club_lucha_api/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 /var/www/html/tfg/club_lucha_api/public/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2026-02-20 18:34:38 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'u2.deleted_at' in 'SELECT'
+[Method: GET, Route: api/mensajes/5]
+in SYSTEMPATH/Database/BaseConnection.php on line 684.
+ 1 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = :c.usuario_1_id:
+OR `c`.`usuario_2_id` = :c.usuario_2_id:
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC', [...], false)
+ 2 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH/Models/ConversacionModel.php(66): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH/Controllers/Api/Mensajes.php(34): App\Models\ConversacionModel->getMisConversaciones('5')
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\Mensajes->index('5')
+ 7 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Mensajes))
+ 8 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-20 18:34:38 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'u2.deleted_at' in 'SELECT'
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 332.
+ 1 SYSTEMPATH/Database/BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = 5
+OR `c`.`usuario_2_id` = 5
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC')
+ 2 SYSTEMPATH/Database/BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = 5
+OR `c`.`usuario_2_id` = 5
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC')
+ 3 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = :c.usuario_1_id:
+OR `c`.`usuario_2_id` = :c.usuario_2_id:
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC', [...], false)
+ 4 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH/Models/ConversacionModel.php(66): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH/Controllers/Api/Mensajes.php(34): App\Models\ConversacionModel->getMisConversaciones('5')
+ 8 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\Mensajes->index('5')
+ 9 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Mensajes))
+10 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-20 18:34:38 --> [Caused by] mysqli_sql_exception: Unknown column 'u2.deleted_at' in 'SELECT'
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 327.
+ 1 SYSTEMPATH/Database/MySQLi/Connection.php(327): mysqli->query('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = 5
+OR `c`.`usuario_2_id` = 5
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC', 0)
+ 2 SYSTEMPATH/Database/BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = 5
+OR `c`.`usuario_2_id` = 5
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC')
+ 3 SYSTEMPATH/Database/BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = 5
+OR `c`.`usuario_2_id` = 5
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC')
+ 4 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = :c.usuario_1_id:
+OR `c`.`usuario_2_id` = :c.usuario_2_id:
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC', [...], false)
+ 5 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH/Models/ConversacionModel.php(66): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH/Controllers/Api/Mensajes.php(34): App\Models\ConversacionModel->getMisConversaciones('5')
+ 9 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\Mensajes->index('5')
+10 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Mensajes))
+11 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-02-20 18:35:05 --> mysqli_sql_exception: Unknown column 'u2.deleted_at' in 'SELECT' in /var/www/html/tfg/club_lucha_api/system/Database/MySQLi/Connection.php:327
+Stack trace:
+#0 /var/www/html/tfg/club_lucha_api/system/Database/MySQLi/Connection.php(327): mysqli->query('SELECT `c`.`id`...', 0)
+#1 /var/www/html/tfg/club_lucha_api/system/Database/BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `c`.`id`...')
+#2 /var/www/html/tfg/club_lucha_api/system/Database/BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `c`.`id`...')
+#3 /var/www/html/tfg/club_lucha_api/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `c`.`id`...', Array, false)
+#4 /var/www/html/tfg/club_lucha_api/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 /var/www/html/tfg/club_lucha_api/system/BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+#6 /var/www/html/tfg/club_lucha_api/app/Models/ConversacionModel.php(66): CodeIgniter\BaseModel->findAll()
+#7 /var/www/html/tfg/club_lucha_api/app/Controllers/Api/Mensajes.php(34): App\Models\ConversacionModel->getMisConversaciones('5')
+#8 /var/www/html/tfg/club_lucha_api/system/CodeIgniter.php(933): App\Controllers\Api\Mensajes->index('5')
+#9 /var/www/html/tfg/club_lucha_api/system/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Mensajes))
+#10 /var/www/html/tfg/club_lucha_api/system/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 /var/www/html/tfg/club_lucha_api/system/Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 /var/www/html/tfg/club_lucha_api/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 /var/www/html/tfg/club_lucha_api/public/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2026-02-20 18:35:05 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'u2.deleted_at' in 'SELECT'
+[Method: GET, Route: api/mensajes/5]
+in SYSTEMPATH/Database/BaseConnection.php on line 684.
+ 1 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = :c.usuario_1_id:
+OR `c`.`usuario_2_id` = :c.usuario_2_id:
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC', [...], false)
+ 2 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH/Models/ConversacionModel.php(66): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH/Controllers/Api/Mensajes.php(34): App\Models\ConversacionModel->getMisConversaciones('5')
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\Mensajes->index('5')
+ 7 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Mensajes))
+ 8 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-20 18:35:05 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'u2.deleted_at' in 'SELECT'
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 332.
+ 1 SYSTEMPATH/Database/BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = 5
+OR `c`.`usuario_2_id` = 5
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC')
+ 2 SYSTEMPATH/Database/BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = 5
+OR `c`.`usuario_2_id` = 5
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC')
+ 3 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = :c.usuario_1_id:
+OR `c`.`usuario_2_id` = :c.usuario_2_id:
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC', [...], false)
+ 4 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH/Models/ConversacionModel.php(66): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH/Controllers/Api/Mensajes.php(34): App\Models\ConversacionModel->getMisConversaciones('5')
+ 8 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\Mensajes->index('5')
+ 9 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Mensajes))
+10 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-20 18:35:05 --> [Caused by] mysqli_sql_exception: Unknown column 'u2.deleted_at' in 'SELECT'
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 327.
+ 1 SYSTEMPATH/Database/MySQLi/Connection.php(327): mysqli->query('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = 5
+OR `c`.`usuario_2_id` = 5
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC', 0)
+ 2 SYSTEMPATH/Database/BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = 5
+OR `c`.`usuario_2_id` = 5
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC')
+ 3 SYSTEMPATH/Database/BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = 5
+OR `c`.`usuario_2_id` = 5
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC')
+ 4 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `c`.`id` as `conversacion_id`, `c`.`ultimo_mensaje_at`, CASE WHEN c.usuario_1_id = 5 THEN u2.nombre ELSE u1.nombre END as nombre_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.apellidos ELSE u1.apellidos END as apellidos_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.rol ELSE u1.rol END as rol_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.id ELSE u1.id END as id_otro, CASE WHEN c.usuario_1_id = 5 THEN u2.deleted_at ELSE u1.deleted_at END as deleted_at_otro, (SELECT cuerpo FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+FROM (`conversaciones`, `conversaciones` `c`)
+LEFT JOIN `usuarios` `u1` ON `c`.`usuario_1_id` = `u1`.`id`
+LEFT JOIN `usuarios` `u2` ON `c`.`usuario_2_id` = `u2`.`id`
+WHERE   (
+`c`.`usuario_1_id` = :c.usuario_1_id:
+OR `c`.`usuario_2_id` = :c.usuario_2_id:
+ )
+GROUP BY `c`.`id`
+ORDER BY `c`.`ultimo_mensaje_at` DESC', [...], false)
+ 5 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH/BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH/Models/ConversacionModel.php(66): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH/Controllers/Api/Mensajes.php(34): App\Models\ConversacionModel->getMisConversaciones('5')
+ 9 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Api\Mensajes->index('5')
+10 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\Mensajes))
+11 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH/Boot.php(363): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

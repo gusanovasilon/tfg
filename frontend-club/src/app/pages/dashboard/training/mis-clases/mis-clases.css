@@ -1,0 +1,193 @@
+.mis-clases-container {
+  padding: 20px;
+  color: #f1f5f9;
+}
+
+.header-section {
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 10px;
+}
+
+.header-section h2 {
+  margin: 0;
+  color: #383737;
+}
+
+.text-orange {
+  color: #f59e0b;
+  margin-right: 5px;
+}
+
+/* GRID RESPONSIVO */
+.entrenamientos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* TARJETAS */
+.card-entreno {
+  background-color: #1e293b;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, border 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.card-entreno:hover {
+  transform: translateY(-5px);
+}
+
+/* Efecto visual si ya está apuntado */
+.card-entreno.is-enrolled {
+  border: 1px solid #10b981; /* Borde verde sutil */
+  background-color: rgba(16, 185, 129, 0.05);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.card-header h3 {
+  font-size: 1.25rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.badge-enrolled {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+  padding: 4px 8px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.card-body p {
+  margin: 8px 0;
+  font-size: 0.95rem;
+  color: #cbd5e1;
+}
+
+.desc-box {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* BOTONES */
+.card-footer {
+  margin-top: auto; /* Empuja el botón siempre abajo */
+  padding-top: 20px;
+}
+
+.btn-toggle {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-apuntar {
+  background-color: #f59e0b; /* Naranja */
+  color: #fff;
+}
+.btn-apuntar:hover { background-color: #d97706; }
+
+.btn-cancelar {
+  background-color: transparent;
+  color: #ef4444; /* Rojo */
+  border: 1px solid #ef4444;
+}
+.btn-cancelar:hover { background-color: rgba(239, 68, 68, 0.1); }
+
+/* ESTADOS VACÍOS Y CARGA */
+.loading-state, .empty-state {
+  text-align: center;
+  padding: 50px;
+  color: #94a3b8;
+}
+
+
+/* ESTILOS DE LOS FILTROS (PESTAÑAS) */
+.filtros-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.btn-filtro {
+  background-color: transparent;
+  color: #4a88df;
+  border: 1px solid #475569;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-filtro:hover {
+  background-color: rgba(139, 139, 139, 0.37);
+}
+
+.btn-filtro.activo {
+  background-color: #f59e0b; /* Naranja activo */
+  color: #fff;
+  border-color: #f59e0b;
+}
+
+/* Efecto visual si ya está apuntado */
+.card-entreno.is-enrolled {
+  border: 1px solid #10b981;
+  background-color: #ecfdf5; /* Verde muy clarito y sólido (fijamos el fondo) */
+  color: #064e3b; /* Texto base oscuro */
+}
+
+/* Oscurecer el título si está apuntado */
+.card-entreno.is-enrolled .card-header h3 {
+  color: #064e3b;
+}
+
+/* Oscurecer los textos de info (Fecha, Lugar, Coach) si está apuntado */
+.card-entreno.is-enrolled .card-body p {
+  color: #166534;
+  font-weight: 500; /* Le damos un pelín de grosor para que se lea aún mejor */
+}
+
+/* Ajustar la caja de descripción para el fondo claro */
+.card-entreno.is-enrolled .desc-box {
+  background-color: rgba(16, 185, 129, 0.15); /* Verdecito translúcido */
+  color: #065f46;
+}
+
+/* Botón para entrenamientos pasados */
+.btn-finalizado {
+  background-color: #334155;
+  color: #94a3b8;
+  cursor: not-allowed;
+  border: 1px solid #475569;
+}
+.btn-finalizado:hover {
+  background-color: #334155; /* No cambia al pasar el ratón */
+}
